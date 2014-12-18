@@ -2,13 +2,13 @@ var _ = require('underscore');
 var BISON = require('bison');
 var cls = require('./lib/class');
 var http = require('http');
-var miksagoConnection = require('websocket-server/lib/ws/connection');
+var miksagoConnection = require('node-websocket-server/lib/ws/connection');
 var url = require('url');
 var useBison = false;
 var Utils = require('./utils');
 var worlizeRequest = require('websocket').request;
 var WS = {};
-var wsServer = require('websocket-server');
+var wsServer = require('node-websocket-server');
 
 module.exports = WS;
 
