@@ -106,8 +106,8 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                            <span class="right-ornament"></span>
                          </h1>
           <form action="none" method="get" accept-charset="utf-8">
-            <input type="text" id="loginnameinput" class="stroke" name="player-name" placeholder="Character Name" maxlength="12" autofocus>
-            <input type="password" id="loginpwinput" class="stroke" name="player-loginpw" placeholder="Password" maxlength="15">
+            <input value="test" type="text" id="loginnameinput" class="stroke" name="player-name" placeholder="Character Name" maxlength="12" autofocus>
+            <input value="test" type="password" id="loginpwinput" class="stroke" name="player-loginpw" placeholder="Password" maxlength="15">
           </form>
           <div class="play">
             <span class="link">Login</span>
@@ -272,6 +272,10 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
       <div id="bubbles"></div>
       <div id="expbar"></div>
       <div id="textWindow"></div>
+      <div class="infoboard" id="playershow">
+        <div id="level" class="level">10 </div>
+		<div id="viplevel" class="level">11</div>
+      </div>
       <div id="inspector">
         <div class="headshot">
           <div> </div>
@@ -281,6 +285,14 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
           <div class="level"></div>
           <div class="health"></div>
         </div>
+      </div>
+      <div id="shoparea">
+        <div class="title"></div>
+        <ul class="items">
+          <li>神器1</li>
+          <li>神器2</li>
+          <li>神器3</li>
+        </ul>
       </div>
       <div id="dropDialog">
         <div id="dropTitle">Input drop count.</div>
@@ -313,7 +325,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
           </div>
         </div>
         <div id="playercount" class="clickable">
-          <span class="count">0</span> <span>players</span>
+          <span class="count">0</span> <span>小伙伴</span>
         </div>
         <div id="barbuttons">
           <div id="chatbutton" class="barbutton clickable"></div>

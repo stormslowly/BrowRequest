@@ -176,13 +176,44 @@ footer, header, hgroup, menu, nav, section {
       width: 100%;
     }
 
+    .infoboard {
+        font-family:'GraphicPixel';
+        color:#e3e3e3;
+        background-color:rgba(0, 0, 0, 0.43);
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 140px;
+        margin-left: 0px;
+        padding: 4px;
+        border-radius: 0 0 6px 0;
+    }
+    #shoparea{
+        font-family:'GraphicPixel';
+        color:#e3e3e3;
+        background-color:rgba(0, 0, 0, 0.43);
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 140px;
+        margin-left: 0px;
+        padding: 4px;
+        border-radius: 0 0 6px 0;
+    }
+
+    #shoparea .title{
+
+    }
+
+
+
     #inspector {
       font-family:'GraphicPixel';
       color:#e3e3e3;
       background-color:rgba(0, 0, 0, 0.43);
       position: absolute;
       top: 15px;
-      left: 15px;
+      left: 165px;
       width: 140px;
       margin-left: 0px;
       padding: 4px;
