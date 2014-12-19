@@ -29,6 +29,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
   <meta property="og:site_name" content="BrowserQuest">
   <meta property="og:description" content="Play Mozilla's BrowserQuest, an HTML5 massively multiplayer game demo powered by WebSockets!">
   <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="stylesheet" href="css/job.css" type="text/css">
   <link rel="stylesheet" href="css/achievements.css" type="text/css">
 
   <link href="img/common/apple-touch-icon-57x57.png" rel="apple-touch-icon-precomposed" sizes="57x57">
@@ -273,8 +274,10 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
       <div id="expbar"></div>
       <div id="textWindow"></div>
       <div class="infoboard" id="playershow">
-        <div id="level" class="level">10 </div>
-		<div id="viplevel" class="level">11</div>
+        <div id="level" class="level">
+          <span>等级: </span> <span class="value"></span> </div>
+		    <div id="viplevel" class="level">
+          <span>VIP:  </span> 0</div>
       </div>
       <div id="inspector">
         <div class="headshot">

@@ -1,0 +1,46 @@
+.infoboard {
+    font-family: 'GraphicPixel';
+    color: #e3e3e3;
+    background-color: rgba(0, 0, 0, 0.43);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 140px;
+    margin-left: 0px;
+    padding: 4px;
+    border-radius: 0 0 6px 0;
+}
+
+
+.level,.viplevel{
+    margin-left: 10px;
+}
+
+.level span{
+    margin-right: 5px;
+}
+
+
+
+#viplevel span{
+    color: #BC7A00;
+    text-shadow: #E8F0B4 -1px -1px;
+}
+
+
+#shoparea {
+    font-family: 'GraphicPixel';
+    color: #e3e3e3;
+    background-color: rgba(0, 0, 0, 0.43);
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 140px;
+    margin-left: 0px;
+    padding: 4px;
+    border-radius: 0 0 6px 0;
+}
+
+#shoparea .title {
+
+}

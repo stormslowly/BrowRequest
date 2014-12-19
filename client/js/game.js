@@ -29,7 +29,6 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
         this.player.moveLeft = false;
         this.player.moveRight = false;
         this.player.disableKeyboardNpcTalk = false;
-        console.info('=====', this.player);
         // Game state
         this.entities = {};
         this.deathpositions = {};
@@ -716,6 +715,8 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
       },
 
       start: function() {
+
+        this.updateLevel(this.player.level);
         this.tick();
         this.hasNeverStarted = false;
         log.info("Game loop started.");
@@ -1465,6 +1466,7 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
             self.player.level = level;
             self.player.experience = exp;
             self.updateExpBar();
+            self.updateLevel(level);
 
             self.infoManager.addDamageInfo("+" + mobExp + " exp", self.player.x, self.player.y - 15, "exp", 3000);
 
@@ -2611,6 +2613,10 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
         if (this.player && this.playerhp_callback) {
           this.playerhp_callback(this.player.hitPoints, this.player.maxHitPoints);
         }
+      },
+      updateLevel:function(level){
+        $('#level .value')[0].innerText = level;
+        console.log('current level is ',level);
       },
       updateExpBar: function() {
         if (this.player && this.playerexp_callback) {
