@@ -1,19 +1,4 @@
 <!DOCTYPE html>
-<!--
-
- , __                                   __
-/|/  \                                 /  \
- | __/ ,_    __           ,   _   ,_  | __ |          _   , _|_
- |   \/  |  /  \_|  |  |_/ \_|/  /  | |/  \|  |   |  |/  / \_|
- |(__/   |_/\__/  \/ \/   \/ |__/   |_/\__/\_/ \_/|_/|__/ \/ |_/
-
-Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworkshop.fr
-
-* Client libraries used: RequireJS, Underscore.js, jQuery, Modernizr
-* Server-side: Node.js, Worlize/WebSocket-Node, miksago/node-websocket-server
-* Should work in latest versions of Firefox, Chrome, Safari, Opera, Safari Mobile and Firefox for Android
-
- -->
 <html lang="en">
 
 <head>
@@ -36,7 +21,6 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
   <link href="img/common/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72">
   <link href="img/common/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114">
   <link href="img/common/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144">
-
   <link href="img/common/apple-touch-startup-image-320x460.png" rel="apple-touch-startup-image" media="(device-width: 320px)">
   <link href="img/common/apple-touch-startup-image-640x920.png" rel="apple-touch-startup-image" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)">
   <link href="img/common/apple-touch-startup-image-768x1004.png" rel="apple-touch-startup-image" media="(device-width: 768px) and (orientation: portrait)">
@@ -46,20 +30,18 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 
   <script src="js/lib/modernizr.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
-                <link rel="stylesheet" href="css/ie.css" type="text/css">
-                <script src="js/lib/css3-mediaqueries.js" type="text/javascript"></script>
-                <script type="text/javascript">
-                document.getElementById('parchment').className = ('error');
-                </script>
-        <![endif]-->
+  <link rel="stylesheet" href="css/ie.css" type="text/css">
+  <script src="js/lib/css3-mediaqueries.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    document.getElementById('parchment').className = ('error');
+  </script>
+  <![endif]-->
   <script src="js/detect.js" type="text/javascript"></script>
   <title>BrowserQuest</title>
 </head>
 <!--[if lt IE 9]>
-    <body class="intro upscaled">
-    <![endif]-->
-<a href="https://github.com/browserquest/BrowserQuest"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
-</a>
+<body class="intro upscaled">
+<![endif]-->
 
 <body class="intro">
   <noscript>
@@ -67,17 +49,16 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
       You need to enable JavaScript to play BrowserQuest.
     </div>
   </noscript>
-  <a id="moztab" class="clickable" target="_blank" href="http://www.mozilla.org/"></a>
+
   <div id="intro">
     <h1 id="logo">
-               <span id="logosparks">
-
-               </span>
-            </h1>
+       <span id="logosparks"></span>
+    </h1>
     <article id="portrait">
       <p>
         Please rotate your device to landscape mode
       </p>
+
       <div id="tilt"></div>
     </article>
     <section id="parchment" class="createcharacter">
@@ -85,10 +66,11 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
       <div class="parchment-middle">
         <article id="createcharacter">
           <h1>
-                           <span class="left-ornament"></span>
-                           Create New Character
-                           <span class="right-ornament"></span>
-                         </h1>
+          <span class="left-ornament"></span>
+          Create New Character
+          <span class="right-ornament"></span>
+        </h1>
+
           <form action="none" method="get" accept-charset="utf-8">
             <input type="text" id="nameinput" class="stroke" name="player-name" placeholder="Character Name" maxlength="12">
             <input type="password" id="pwinput" class="stroke" name="player-pw" placeholder="Password" maxlength="15">
@@ -102,10 +84,11 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         </article>
         <article id="loadcharacter">
           <h1>
-                           <span class="left-ornament"></span>
-                           BrowserQuest
-                           <span class="right-ornament"></span>
-                         </h1>
+          <span class="left-ornament"></span>
+          BrowserQuest
+          <span class="right-ornament"></span>
+        </h1>
+
           <form action="none" method="get" accept-charset="utf-8">
             <input value="test" type="text" id="loginnameinput" class="stroke" name="player-name" placeholder="Character Name" maxlength="12" autofocus>
             <input value="test" type="password" id="loginpwinput" class="stroke" name="player-loginpw" placeholder="Password" maxlength="15">
@@ -121,11 +104,12 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         </article>
         <article id="confirmation">
           <h1>
-                           <span class="left-ornament"></span>
-                           You need to accept the following terms of usage before creating a new character.<br>
-                           None right now - just Continue!<br><br>
-                           <span class="right-ornament"></span>
-                         </h1>
+          <span class="left-ornament"></span>
+          You need to accept the following terms of usage before creating a new character.<br>
+          None right now - just Continue!<br><br>
+          <span class="right-ornament"></span>
+        </h1>
+
           <div id="continue">
             <span class="link">Continue</span>
           </div>
@@ -135,12 +119,14 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         </article>
         <article id="credits">
           <h1>
-                           <span class="left-ornament"></span>
+          <span class="left-ornament"></span>
                            <span class="title">
-                               Made for Mozilla by <a target="_blank" class="stroke clickable" href="http://www.littleworkshop.fr/">Little Workshop</a>
+                               Made for Mozilla by <a target="_blank" class="stroke clickable"
+                                                      href="http://www.littleworkshop.fr/">Little Workshop</a>
                            </span>
-                           <span class="right-ornament"></span>
-                        </h1>
+          <span class="right-ornament"></span>
+        </h1>
+
           <div id="authors">
             <div id="guillaume">
               <div class="avatar"></div>
@@ -155,7 +141,8 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
           </div>
           <div id="seb">
 
-            <span id="note"></span> Music by <a class="clickable" target="_blank" href="http://soundcloud.com/gyrowolf">Terrel O'Brien</a>, <a class="clickable" target="_blank" href="http://blog.dayjo.org">Joel Day</a>, <a class="clickable" target="_blank" href="http://www.dantilden.com">Dan Tilden</a>, &amp; <a target="_blank" class="clickable" href="http://soundcloud.com/aaron-anderson-11">Aaron Krogh</a>
+            <span id="note"></span> Music by <a class="clickable" target="_blank" href="http://soundcloud.com/gyrowolf">Terrel
+          O'Brien</a>, <a class="clickable" target="_blank" href="http://blog.dayjo.org">Joel Day</a>, <a class="clickable" target="_blank" href="http://www.dantilden.com">Dan Tilden</a>, &amp; <a target="_blank" class="clickable" href="http://soundcloud.com/aaron-anderson-11">Aaron Krogh</a>
 
           </div>
           <div id="close-credits">
@@ -164,15 +151,17 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         </article>
         <article id="about">
           <h1>
-                           <span class="left-ornament"></span>
+          <span class="left-ornament"></span>
                            <span class="title">
                                What is BrowserQuest?
                            </span>
-                           <span class="right-ornament"></span>
-                        </h1>
+          <span class="right-ornament"></span>
+        </h1>
+
           <p id="game-desc">
             BrowserQuest is a multiplayer game inviting you to explore a world of adventure from your Web browser.
           </p>
+
           <div class="left">
             <div class="img"></div>
             <p>
@@ -199,14 +188,16 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         </article>
         <article id="death">
           <p>You are dead...</p>
+
           <div id="respawn" class="button"></div>
         </article>
         <article id="error">
           <h1>
-                           <span class="left-ornament"></span>
-                           Your browser cannot run BrowserQuest!
-                           <span class="right-ornament"></span>
-                         </h1>
+          <span class="left-ornament"></span>
+          Your browser cannot run BrowserQuest!
+          <span class="right-ornament"></span>
+        </h1>
+
           <p>
             We're sorry, but your browser does not support WebSockets.
             <br> In order to play, we recommend using the latest version of Firefox, Chrome or Safari.
@@ -214,13 +205,16 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         </article>
         <article id="legal">
           <h1>
-                           <span class="left-ornament"></span>
-                           Privacy
-                           <span class="right-ornament"></span>
-                         </h1>
+          <span class="left-ornament"></span>
+          Privacy
+          <span class="right-ornament"></span>
+        </h1>
+
           <p>
-            BrowserQuest stores your character name, game achievements and equipment in your browser and does not send them to Mozilla. We do collect server log data (such as IP address) as well as web analytics data. We handle info we receive about you as explained in our <a class="clickable" target="_blank" href="http://www.mozilla.org/en-US/privacy-policy">Privacy Policy</a>.
+            BrowserQuest stores your character name, game achievements and equipment in your browser and does not send them to Mozilla. We do collect server log data (such as IP address) as well as web analytics data. We handle info we receive about you as explained in our <a class="clickable" target="_blank" href="http://www.mozilla.org/en-US/privacy-policy">Privacy
+          Policy</a>.
           </p>
+
           <div id="close-legal">
             <span>- click anywhere to close -</span>
           </div>
@@ -235,14 +229,16 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
       <article id="instructions" class="clickable">
         <div class="close"></div>
         <h1>
-                       <span class="left-ornament"></span>
-                       How to play
-                       <span class="right-ornament"></span>
-                    </h1>
+        <span class="left-ornament"></span>
+        How to play
+        <span class="right-ornament"></span>
+      </h1>
         <ul>
-          <li><span class="icon"></span>Left click or tap to move, attack and pick up items. Hold SHIFT to attack another player.</li>
+          <li><span class="icon"></span>Left click or tap to move, attack and pick up items. Hold SHIFT to attack another player.
+          </li>
           <li><span class="icon"></span>Press ENTER to chat.</li>
-          <li><span class="icon"></span>Your character is automatically saved as you play. The blue line on the right is your exp bar.</li>
+          <li><span class="icon"></span>Your character is automatically saved as you play. The blue line on the right is your exp bar.
+          </li>
         </ul>
         <p>- click anywhere to close -</p>
       </article>
@@ -275,13 +271,15 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
       <div id="textWindow"></div>
       <div class="infoboard" id="playershow">
         <div id="level" class="level">
-          <span>等级: </span> <span class="value"></span> </div>
-		    <div id="viplevel" class="level">
-          <span>VIP:  </span> 0</div>
+          <span>等级: </span> <span class="value"></span>
+        </div>
+        <div id="viplevel" class="level">
+          <span>VIP:  </span> 0
+        </div>
       </div>
       <div id="inspector">
         <div class="headshot">
-          <div> </div>
+          <div></div>
         </div>
         <div class="details">
           <div class="name"></div>
@@ -343,8 +341,8 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         </form>
       </div>
       <!-- TODO div id="dialogbox">
-                    Right now this happens in the footer.
-                </div to accept members for instance… -->
+                  Right now this happens in the footer.
+              </div to accept members for instance… -->
       <div id="population">
         <div id="instance-population" class="">
           <span>0</span> <span>players</span> in your instance
@@ -382,6 +380,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
       <div class="coin"></div>
       <span class="achievement-name">???</span>
       <span class="achievement-description">???</span>
+
       <div class="achievement-sharing">
         <a href="" class="twitter"></a>
       </div>
@@ -395,15 +394,12 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
   <script type="text/javascript">
   var ctx = document.querySelector('canvas').getContext('2d'),
     parchment = document.getElementById("parchment");
-
   if (!Detect.supportsWebSocket()) {
     parchment.className = "error";
   }
-
   if (ctx.mozImageSmoothingEnabled === undefined) {
     document.querySelector('body').className += ' upscaled';
   }
-
   parchment.className = "loadcharacter";
   </script>
 
