@@ -5,24 +5,39 @@
     position: absolute;
     top: 15px;
     left: 15px;
-    width: 140px;
+    width: 150px;
     margin-left: 0px;
     padding: 4px;
     border-radius: 0 0 6px 0;
 }
 
+.infoboard:hover{
+    background-color: rgba(0, 0, 0, 0.93);
+}
+
+#buybutton{
+    width:30px;
+    height: 100%;
+    display: inline-block;
+}
 
 .level,.viplevel{
     margin-left: 10px;
+    height: 20px;
 }
 
-.level span{
+.levelvalue{
+    width: 25px;
+    display: inline-block;
+    text-align: right;
+}
+
+.level .head{
     margin-right: 5px;
+    display: inline-block;
 }
 
-
-
-#viplevel span{
+#viplevel .head{
     color: #BC7A00;
     text-shadow: #E8F0B4 -1px -1px;
 }
@@ -44,3 +59,12 @@
 #shoparea .title {
 
 }
+
+.spark {
+    z-index: 4;
+    -moz-animation: logo3 .8s steps(6, end) infinite;
+    -webkit-animation: logo3 .8s steps(6, end) infinite;
+    -o-animation: logo3 .8s steps(6, end) infinite;
+    -ms-animation: logo3 .8s steps(6, end) infinite;
+}
+

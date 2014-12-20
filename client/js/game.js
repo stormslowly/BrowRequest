@@ -2615,7 +2615,7 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
         }
       },
       updateLevel:function(level){
-        $('#level .value')[0].innerText = level;
+        $('#level .levelvalue')[0].innerText = level;
         console.log('current level is ',level);
       },
       updateExpBar: function() {
