@@ -298,15 +298,16 @@ define(['jquery', 'app', 'entrypoint'], function($, App, EntryPoint) {
         game.respawn();
         $('body').removeClass('death');
       });
+
       $('.shopitem').click(function() {
         game.showNotification('你的金币不足! : (');
         game.audioManager.playSound('teleport');
       });
+
       $('#pkarea').click(function() {
         game.showNotification('竞技场只欢迎50级以上的英雄。');
         game.audioManager.playSound('teleport');
       });
-
 
       $(document).mousemove(function(event) {
         app.setMouseCoordinates(event);

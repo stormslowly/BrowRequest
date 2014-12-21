@@ -171,7 +171,7 @@ define(['jquery', 'storage'], function($, Storage) {
         this.$play.addClass('loading');
         $playButton.unbind('click');
         this.playButtonRestoreText = $playButton.text();
-        $playButton.text('Loading...');
+        $playButton.text('加载中...');
       }
     },
     getActiveForm: function() {

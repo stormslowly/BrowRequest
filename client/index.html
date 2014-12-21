@@ -53,7 +53,7 @@
 <body class="intro">
 <noscript>
   <div class="alert">
-    You need to enable JavaScript to play BrowserQuest.
+    你的浏览器好像不支持JavaScript.
   </div>
 </noscript>
 
@@ -63,7 +63,7 @@
   </h1>
   <article id="portrait">
     <p>
-      Please rotate your device to landscape mode
+      请旋转你的手机
     </p>
 
     <div id="tilt"></div>
@@ -74,7 +74,7 @@
       <article id="createcharacter">
         <h1>
           <span class="left-ornament"></span>
-          Create New Character
+          创建新角色
           <span class="right-ornament"></span>
         </h1>
 
@@ -88,45 +88,45 @@
                  maxlength="48">
         </form>
         <div class="play">
-          <span class="link">Create</span>
+          <span class="link">创建</span>
         </div>
         <div class="validation-summary"></div>
       </article>
       <article id="loadcharacter">
         <h1>
           <span class="left-ornament"></span>
-          BrowserQuest
+          勇士的冒险
           <span class="right-ornament"></span>
         </h1>
 
         <form action="none" method="get" accept-charset="utf-8">
           <input value="test" type="text" id="loginnameinput" class="stroke" name="player-name"
-                 placeholder="Character Name" maxlength="12" autofocus>
+                 placeholder="输入角色名字" maxlength="12" autofocus>
           <input value="test" type="password" id="loginpwinput" class="stroke" name="player-loginpw"
-                 placeholder="Password" maxlength="15">
+                 placeholder="输入你的密码" maxlength="15">
         </form>
         <div class="play">
-          <span class="link">Login</span>
+          <span class="link">登陆</span>
           <img src="img/common/spinner2.gif">
         </div>
         <div class="validation-summary"></div>
         <div id="create-new">
-          <span class="link">New Character</span>
+          <span class="link">创建角色</span>
         </div>
       </article>
       <article id="confirmation">
         <h1>
           <span class="left-ornament"></span>
-          You need to accept the following terms of usage before creating a new character.<br>
-          None right now - just Continue!<br><br>
+          同意一下合约才能创建角色<br>
+          别啰嗦 创建角色吧！<br><br>
           <span class="right-ornament"></span>
         </h1>
 
         <div id="continue">
-          <span class="link">Continue</span>
+          <span class="link">继续</span>
         </div>
         <div id="cancel">
-          <span class="link">Cancel</span>
+          <span class="link">取消</span>
         </div>
       </article>
       <article id="credits">
@@ -167,73 +167,68 @@
         <h1>
           <span class="left-ornament"></span>
                            <span class="title">
-                               What is BrowserQuest?
+                               游戏简介
                            </span>
           <span class="right-ornament"></span>
         </h1>
 
         <p id="game-desc">
+          "勇士的冒险"邀请你来冒险。
           BrowserQuest is a multiplayer game inviting you to explore a world of adventure from your Web browser.
         </p>
 
         <div class="left">
           <div class="img"></div>
           <p>
-            This demo is powered by HTML5 and WebSockets, which allow for real-time gaming and apps on the Web.
+            基于HTML5h和WebSocket的实时网页游戏。
           </p>
             <span class="link">
                                 <span class="ext-link"></span>
-            <a target="_blank" class="clickable" href="http://hacks.mozilla.org/2012/03/browserquest/">Learn more</a> about the technology
+            <a target="_blank" class="clickable" href="http://hacks.mozilla.org/2012/03/browserquest/">技术细节</a>
             </span>
         </div>
         <div class="right">
           <div class="img"></div>
           <p>
+            你能在火狐，Chrome，Safari和iOS，Android手机上玩勇士的冒险。
             BrowserQuest is available on Firefox, Chrome, Safari as well as iOS devices and Firefox for Android.
           </p>
-            <span class="link">
-                                <span class="ext-link"></span>
-            <a target="_blank" class="clickable" href="http://github.com/browserquest/BrowserQuest">Grab the source</a> on Github
-            </span>
         </div>
         <div id="close-about">
-          <span>- click anywhere to close -</span>
+          <span>- 关闭 -</span>
         </div>
       </article>
       <article id="death">
-        <p>You are dead...</p>
+        <p>(⊙o⊙)… 你挂了~<br>点击红色按钮重生</p>
 
         <div id="respawn" class="button"></div>
       </article>
       <article id="error">
         <h1>
           <span class="left-ornament"></span>
-          Your browser cannot run BrowserQuest!
+          你的浏览器支持本游戏。
           <span class="right-ornament"></span>
         </h1>
-
         <p>
-          We're sorry, but your browser does not support WebSockets.
-          <br> In order to play, we recommend using the latest version of Firefox, Chrome or Safari.
+          你的浏览器不支持websocket，所以本游戏不能运行
+          <br> 请升级你的您的浏览器到最新的火狐，Chrome或Safari以带来最佳体验。
         </p>
       </article>
       <article id="legal">
         <h1>
           <span class="left-ornament"></span>
-          Privacy
+          隐私保护
           <span class="right-ornament"></span>
         </h1>
 
         <p>
-          BrowserQuest stores your character name, game achievements and equipment in your browser and does not send
-          them to Mozilla. We do collect server log data (such as IP address) as well as web analytics data. We handle
-          info we receive about you as explained in our <a class="clickable" target="_blank"
+          “勇士的冒险”游戏只会保存你的游戏账户、游戏中的成就和装备信息在浏览器中.并不会将他们发送到服务器。为了统计需要我们会搜集您IP. 更多隐私保护的信息请参看 <a class="clickable" target="_blank"
                                                            href="http://www.mozilla.org/en-US/privacy-policy">Privacy
           Policy</a>.
         </p>
 
         <div id="close-legal">
-          <span>- click anywhere to close -</span>
+          <span>- 关闭 -</span>
         </div>
       </article>
     </div>
@@ -251,15 +246,13 @@
         <span class="right-ornament"></span>
       </h1>
       <ul>
-        <li><span class="icon"></span>Left click or tap to move, attack and pick up items. Hold SHIFT to attack another
-          player.
+        <li><span class="icon"></span>使用左键移动角色，或者攻击NPC;shift+左键攻击其他游戏玩家.
         </li>
-        <li><span class="icon"></span>Press ENTER to chat.</li>
-        <li><span class="icon"></span>Your character is automatically saved as you play. The blue line on the right is
-          your exp bar.
+        <li><span class="icon"></span>使用ENTER开始聊天.</li>
+        <li><span class="icon"></span>游戏角色信息会实时保存，屏幕右侧的蓝条是你的经验条.
         </li>
       </ul>
-      <p>- click anywhere to close -</p>
+      <p>- 关闭 -</p>
     </article>
     <article id="achievements" class="page1 clickable">
       <div class="close"></div>
@@ -268,12 +261,12 @@
         </div>
       </div>
       <div id="achievements-count" class="stroke">
-        Completed
+        成就
         <div>
           <span id="unlocked-achievements">0</span> /
           <span id="total-achievements"></span>
         </div>
-        Close
+        关闭
       </div>
       <nav class="clickable">
         <div id="previous"></div>
@@ -359,7 +352,7 @@
         <div id="coinsparks"></div>
       </div>
       <div id="achievement-info">
-        <div class="title">New Achievement Unlocked!</div>
+        <div class="title">新成就解锁</div>
         <div class="name"></div>
       </div>
     </div>
@@ -377,7 +370,7 @@
         </div>
       </div>
       <div id="playercount" class="clickable">
-        <span class="count">0</span> <span>小伙伴</span>
+        <span class="count">0</span> <span>在线</span>
       </div>
       <div id="barbuttons">
         <div id="chatbutton" class="barbutton clickable"></div>
@@ -396,13 +389,13 @@
             </div to accept members for instance… -->
     <div id="population">
       <div id="instance-population" class="">
-        <span>0</span> <span>players</span> in your instance
+        <span>0</span> <span>小伙伴</span>和你组队
       </div>
       <div id="guild-population" class="">
-        <span>0</span> <span>players</span> in «&nbsp;<span id="guild-name"></span>&nbsp;»
+        <span>0</span> <span>在线</span> in «&nbsp;<span id="guild-name"></span>&nbsp;»
       </div>
       <div id="world-population" class="">
-        <span>0</span> <span>players</span> total
+        <span>0</span> <span>在线</span> total
       </div>
     </div>
   </div>
