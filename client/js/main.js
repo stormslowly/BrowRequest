@@ -1,7 +1,7 @@
-define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
+define(['jquery', 'app', 'entrypoint'], function($, App, EntryPoint) {
   var app, game;
-  var initApp = function () {
-    $(document).ready(function () {
+  var initApp = function() {
+    $(document).ready(function() {
       app = new App();
       app.center();
       if (Detect.isWindows()) {
@@ -16,7 +16,7 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
         // Remove chat placeholder
         $('#chatinput').removeAttr('placeholder');
       }
-      $('body').click(function (event) {
+      $('body').click(function(event) {
         if ($('#parchment').hasClass('credits')) {
           app.toggleScrollContent('credits');
         }
@@ -27,17 +27,17 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           app.toggleScrollContent('about');
         }
       });
-      $('.barbutton').click(function () {
+      $('.barbutton').click(function() {
         $(this).toggleClass('active');
       });
-      $('#chatbutton').click(function () {
+      $('#chatbutton').click(function() {
         if ($('#chatbutton').hasClass('active')) {
           app.showChat();
         } else {
           app.hideChat();
         }
       });
-      $('#helpbutton').click(function () {
+      $('#helpbutton').click(function() {
         if ($('body').hasClass('about')) {
           app.closeInGameScroll('about');
           $('#helpbutton').removeClass('active');
@@ -45,29 +45,34 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           app.toggleScrollContent('about');
         }
       });
-      $('#achievementsbutton').click(function () {
+      $('#achievementsbutton').click(function() {
         app.toggleAchievements();
         if (app.blinkInterval) {
           clearInterval(app.blinkInterval);
         }
         $(this).removeClass('blink');
       });
-      $('#instructions').click(function () {
+
+      $('#buybutton').click(function() {
+        app.toggleShop();
+      });
+
+      $('#instructions').click(function() {
         app.hideWindows();
       });
-      $('#playercount').click(function () {
+      $('#playercount').click(function() {
         app.togglePopulationInfo();
       });
-      $('#population').click(function () {
+      $('#population').click(function() {
         app.togglePopulationInfo();
       });
-      $('.clickable').click(function (event) {
+      $('.clickable').click(function(event) {
         event.stopPropagation();
       });
-      $('#toggle-credits').click(function () {
+      $('#toggle-credits').click(function() {
         app.toggleScrollContent('credits');
       });
-      $('#toggle-legal').click(function () {
+      $('#toggle-legal').click(function() {
         app.toggleScrollContent('legal');
         if (game.renderer.mobile) {
           if ($('#parchment').hasClass('legal')) {
@@ -75,37 +80,36 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           } else {
             $(this).text('Privacy');
           }
-        }
-        ;
+        };
       });
-      $('#create-new span').click(function () {
+      $('#create-new span').click(function() {
         app.animateParchment('loadcharacter', 'confirmation');
       });
-      $('#continue span').click(function () {
+      $('#continue span').click(function() {
         app.storage.clear();
         app.animateParchment('confirmation', 'createcharacter');
         $('body').removeClass('returning');
         app.clearValidationErrors();
       });
-      $('#cancel span').click(function () {
+      $('#cancel span').click(function() {
         app.animateParchment('confirmation', 'loadcharacter');
       });
-      $('.ribbon').click(function () {
+      $('.ribbon').click(function() {
         app.toggleScrollContent('about');
       });
-      $('#nameinput').bind("keyup", function () {
+      $('#nameinput').bind("keyup", function() {
         app.toggleButton();
       });
-      $('#pwinput').bind("keyup", function () {
+      $('#pwinput').bind("keyup", function() {
         app.toggleButton();
       });
-      $('#pwinput2').bind("keyup", function () {
+      $('#pwinput2').bind("keyup", function() {
         app.toggleButton();
       });
-      $('#emailinput').bind("keyup", function () {
+      $('#emailinput').bind("keyup", function() {
         app.toggleButton();
       });
-      $('#previous').click(function () {
+      $('#previous').click(function() {
         var $achievements = $('#achievements');
         if (app.currentPage === 1) {
           return false;
@@ -114,7 +118,7 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           $achievements.removeClass().addClass('active page' + app.currentPage);
         }
       });
-      $('#next').click(function () {
+      $('#next').click(function() {
         var $achievements = $('#achievements'),
           $lists = $('#lists'),
           nbPages = $lists.children('ul').length;
@@ -126,15 +130,15 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
         }
       });
       $('#notifications div').bind(TRANSITIONEND, app.resetMessagesPosition.bind(app));
-      $('.close').click(function () {
+      $('.close').click(function() {
         app.hideWindows();
       });
-      $('.twitter').click(function () {
+      $('.twitter').click(function() {
         var url = $(this).attr('href');
         app.openPopup('twitter', url);
         return false;
       });
-      $('.facebook').click(function () {
+      $('.facebook').click(function() {
         var url = $(this).attr('href');
         app.openPopup('facebook', url);
         return false;
@@ -146,11 +150,10 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           $('#playerimage').attr('src', data.player.image);
         }
       }
-      $('.play span').click(function (event) {
+      $('.play span').click(function(event) {
         app.tryStartingGame();
       });
-      document.addEventListener("touchstart", function () {
-      }, false);
+      document.addEventListener("touchstart", function() {}, false);
       $('#resize-check').bind("transitionend", app.resizeUi.bind(app));
       $('#resize-check').bind("webkitTransitionEnd", app.resizeUi.bind(app));
       $('#resize-check').bind("oTransitionEnd", app.resizeUi.bind(app));
@@ -158,8 +161,8 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
       initGame();
     });
   };
-  var initGame = function () {
-    require(['game'], function (Game) {
+  var initGame = function() {
+    require(['game'], function(Game) {
       var canvas = document.getElementById("entities"),
         background = document.getElementById("background"),
         foreground = document.getElementById("foreground"),
@@ -171,33 +174,33 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
       if (app.isDesktop && app.supportsWorkers) {
         game.loadMap();
       }
-      game.onGameStart(function () {
+      game.onGameStart(function() {
         app.initEquipmentIcons();
         var entry = new EntryPoint();
         entry.execute(game);
       });
-      game.onDisconnect(function (message) {
+      game.onDisconnect(function(message) {
         $('#death').find('p').html(message + "<em>Please reload the page.</em>");
         $('#respawn').hide();
       });
-      game.onPlayerDeath(function () {
+      game.onPlayerDeath(function() {
         if ($('body').hasClass('credits')) {
           $('body').removeClass('credits');
         }
         $('body').addClass('death');
       });
-      game.onPlayerEquipmentChange(function () {
+      game.onPlayerEquipmentChange(function() {
         app.initEquipmentIcons();
       });
-      game.onPlayerInvincible(function () {
+      game.onPlayerInvincible(function() {
         $('#hitpoints').toggleClass('invincible');
       });
-      game.onNbPlayersChange(function (worldPlayers, totalPlayers) {
-        var setWorldPlayersString = function (string) {
+      game.onNbPlayersChange(function(worldPlayers, totalPlayers) {
+        var setWorldPlayersString = function(string) {
             $("#instance-population").find("span:nth-child(2)").text(string);
             $("#playercount").find("span:nth-child(2)").text(string);
           },
-          setTotalPlayersString = function (string) {
+          setTotalPlayersString = function(string) {
             $("#world-population").find("span:nth-child(2)").text(string);
           };
         $("#playercount").find("span.count").text(worldPlayers);
@@ -214,8 +217,8 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           setTotalPlayersString("players");
         }
       });
-      game.onGuildPopulationChange(function (guildName, guildPopulation) {
-        var setGuildPlayersString = function (string) {
+      game.onGuildPopulationChange(function(guildName, guildPopulation) {
+        var setGuildPlayersString = function(string) {
           $("#guild-population").find("span:nth-child(2)").text(string);
         };
         $('#guild-population').addClass("visible");
@@ -227,10 +230,10 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           setGuildPlayersString("players");
         }
       });
-      game.onAchievementUnlock(function (id, name, description) {
+      game.onAchievementUnlock(function(id, name, description) {
         app.unlockAchievement(id, name);
       });
-      game.onNotification(function (message) {
+      game.onNotification(function(message) {
         app.showMessage(message);
       });
       app.initHealthBar();
@@ -242,14 +245,14 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
       $('#emailinput').attr('value', '');
       $('#chatbox').attr('value', '');
       if (game.renderer.mobile || game.renderer.tablet) {
-        $('#foreground').bind('touchstart', function (event) {
+        $('#foreground').bind('touchstart', function(event) {
           app.center();
           app.setMouseCoordinates(event.originalEvent.touches[0]);
           game.click();
           app.hideWindows();
         });
       } else {
-        $('#foreground').click(function (event) {
+        $('#foreground').click(function(event) {
           app.center();
           app.setMouseCoordinates(event);
           if (game && !app.dropDialogPopuped) {
@@ -260,7 +263,7 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
         });
       }
       $('body').unbind('click');
-      $('body').click(function (event) {
+      $('body').click(function(event) {
         var hasClosedParchment = false;
         if ($('#parchment').hasClass('credits')) {
           if (game.started) {
@@ -290,19 +293,22 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           game.click();
         }
       });
-      $('#respawn').click(function (event) {
+      $('#respawn').click(function(event) {
         game.audioManager.playSound("revive");
         game.respawn();
         $('body').removeClass('death');
       });
-      $(document).mousemove(function (event) {
+      $('.shopitem').click(function() {
+        game.showNotification('你的金币不足!! : (');
+      })
+      $(document).mousemove(function(event) {
         app.setMouseCoordinates(event);
         if (game.started) {
           game.pvpFlag = event.shiftKey;
           game.movecursor();
         }
       });
-      $(document).keyup(function (e) {
+      $(document).keyup(function(e) {
         var key = e.which;
         if (game.started && !$('#chatbox').hasClass('active')) {
           switch (key) {
@@ -335,7 +341,7 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           }
         }
       });
-      $(document).keydown(function (e) {
+      $(document).keydown(function(e) {
         var key = e.which,
           $chat = $('#chatinput');
         if (key === Types.Keys.ENTER) {
@@ -344,8 +350,7 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           } else {
             app.showChat();
           }
-        }
-        else if (key === 16)
+        } else if (key === 16)
           game.pvpFlag = true;
         if (game.started && !$('#chatbox').hasClass('active')) {
           pos = {
@@ -393,12 +398,12 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           }
         }
       });
-      $(document).keyup(function (e) {
+      $(document).keyup(function(e) {
         var key = e.which;
         if (key === 16)
           game.pvpFlag = false;
       });
-      $('#chatinput').keydown(function (e) {
+      $('#chatinput').keydown(function(e) {
         var key = e.which,
           $chat = $('#chatinput'),
           placeholder = $(this).attr("placeholder");
@@ -428,7 +433,7 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           return false;
         }
       });
-      $('#chatinput').focus(function (e) {
+      $('#chatinput').focus(function(e) {
         var placeholder = $(this).attr("placeholder");
         if (!Detect.isFirefoxAndroid()) {
           $(this).val(placeholder);
@@ -437,19 +442,19 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           this.setSelectionRange(0, 0);
         }
       });
-      $('#nameinput').focusin(function () {
+      $('#nameinput').focusin(function() {
         $('#name-tooltip').addClass('visible');
       });
-      $('#nameinput').focusout(function () {
+      $('#nameinput').focusout(function() {
         $('#name-tooltip').removeClass('visible');
       });
-      $('#nameinput').keypress(function (event) {
+      $('#nameinput').keypress(function(event) {
         $('#name-tooltip').removeClass('visible');
       });
-      $('#mutebutton').click(function () {
+      $('#mutebutton').click(function() {
         game.audioManager.toggle();
       });
-      $(document).bind("keydown", function (e) {
+      $(document).bind("keydown", function(e) {
         var key = e.which,
           $chat = $('#chatinput');
         if (key === 13) { // Enter
@@ -458,16 +463,16 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
             return false;
           } else {
             if (app.loginFormActive() || app.createNewCharacterFormActive()) {
-              $('input').blur();      // exit keyboard on mobile
+              $('input').blur(); // exit keyboard on mobile
               app.tryStartingGame();
-              return false;           // prevent form submit
+              return false; // prevent form submit
             }
           }
         }
         if ($('#chatinput:focus').size() == 0 && $('#nameinput:focus').size() == 0) {
           if (key === 27) { // ESC
             app.hideWindows();
-            _.each(game.player.attackers, function (attacker) {
+            _.each(game.player.attackers, function(attacker) {
               attacker.stop();
             });
             return false;
@@ -484,7 +489,7 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
           // }
         }
       });
-      $('#healthbar').click(function (e) {
+      $('#healthbar').click(function(e) {
         var hb = $('#healthbar'),
           hp = $('#hitpoints'),
           hpg = $('#hpguide');
@@ -493,12 +498,12 @@ define(['jquery', 'app', 'entrypoint'], function ($, App, EntryPoint) {
         if ((e.offsetX >= hpp.left) && (e.offsetX < hb.width())) {
           if (hpg.css('display') === 'none') {
             hpg.css('display', 'block');
-            setInterval(function () {
+            setInterval(function() {
               if (((game.player.hitPoints / game.player.maxHitPoints) <= game.hpGuide) &&
                 (game.healShortCut >= 0) &&
                 Types.isHealingItem(game.player.inventory[game.healShortCut]) &&
                 (game.player.inventoryCount[game.healShortCut] > 0)
-                ) {
+              ) {
                 game.eat(game.healShortCut);
               }
             }, 100);

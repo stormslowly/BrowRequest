@@ -1,6 +1,6 @@
-define(['jquery', 'storage'], function ($, Storage) {
+define(['jquery', 'storage'], function($, Storage) {
   var App = Class.extend({
-    init: function () {
+    init: function() {
       this.currentPage = 1;
       this.blinkInterval = null;
       this.isParchmentReady = true;
@@ -14,7 +14,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         this.frontPage = 'createcharacter';
       }
     },
-    setGame: function (game) {
+    setGame: function(game) {
       this.game = game;
       this.isMobile = this.game.renderer.mobile;
       this.isTablet = this.game.renderer.tablet;
@@ -22,11 +22,11 @@ define(['jquery', 'storage'], function ($, Storage) {
       this.supportsWorkers = !!window.Worker;
       this.ready = true;
     },
-    initFormFields: function () {
+    initFormFields: function() {
       var self = this;
       // Play button
       this.$play = $('.play');
-      this.getPlayButton = function () {
+      this.getPlayButton = function() {
         return this.getActiveForm().find('.play span')
       };
       this.setPlayButtonState(true);
@@ -42,25 +42,25 @@ define(['jquery', 'storage'], function ($, Storage) {
       this.createNewCharacterFormFields = [this.$nameinput, this.$pwinput, this.$pwinput2, this.$email];
       // Functions to return the proper username / password fields to use, depending on which form
       // (login or create new character) is currently active.
-      this.getUsernameField = function () {
+      this.getUsernameField = function() {
         return this.createNewCharacterFormActive() ? this.$nameinput : this.$loginnameinput;
       };
-      this.getPasswordField = function () {
+      this.getPasswordField = function() {
         return this.createNewCharacterFormActive() ? this.$pwinput : this.$loginpwinput;
       };
     },
-    center: function () {
+    center: function() {
       window.scrollTo(0, 1);
     },
-    canStartGame: function () {
+    canStartGame: function() {
       if (this.isDesktop) {
         return (this.game && this.game.map && this.game.map.isLoaded);
       } else {
         return this.game;
       }
     },
-    tryStartingGame: function () {
-      if (this.starting) return;        // Already loading
+    tryStartingGame: function() {
+      if (this.starting) return; // Already loading
       var self = this;
       var action = this.createNewCharacterFormActive() ? 'create' : 'login';
       var username = this.getUsernameField().attr('value');
@@ -74,7 +74,7 @@ define(['jquery', 'storage'], function ($, Storage) {
       if (!this.validateFormFields(username, userpw, userpw2, email)) return;
       this.setPlayButtonState(false);
       if (!this.ready || !this.canStartGame()) {
-        var watchCanStart = setInterval(function () {
+        var watchCanStart = setInterval(function() {
           log.debug("waiting...");
           if (self.canStartGame()) {
             clearInterval(watchCanStart);
@@ -85,7 +85,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         this.startGame(action, username, userpw, email);
       }
     },
-    startGame: function (action, username, userpw, email) {
+    startGame: function(action, username, userpw, email) {
       var self = this;
       var firstTimePlaying = !self.storage.hasAlreadyPlayed();
       if (username && !this.game.started) {
@@ -114,7 +114,7 @@ define(['jquery', 'storage'], function ($, Storage) {
           self.game.loadMap();
         }
         this.center();
-        this.game.run(action, function (result) {
+        this.game.run(action, function(result) {
           if (result.success === true) {
             self.start();
           } else {
@@ -145,7 +145,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         });
       }
     },
-    start: function () {
+    start: function() {
       var firstTimePlaying = !this.storage.hasAlreadyPlayed();
       this.hideIntro();
       $('body').addClass('started');
@@ -153,13 +153,13 @@ define(['jquery', 'storage'], function ($, Storage) {
         this.toggleInstructions();
       }
     },
-    setPlayButtonState: function (enabled) {
+    setPlayButtonState: function(enabled) {
       var self = this;
       var $playButton = this.getPlayButton();
       if (enabled) {
         this.starting = false;
         this.$play.removeClass('loading');
-        $playButton.click(function () {
+        $playButton.click(function() {
           self.tryStartingGame();
         });
         if (this.playButtonRestoreText) {
@@ -174,15 +174,15 @@ define(['jquery', 'storage'], function ($, Storage) {
         $playButton.text('Loading...');
       }
     },
-    getActiveForm: function () {
+    getActiveForm: function() {
       if (this.loginFormActive()) return $('#loadcharacter');
       else if (this.createNewCharacterFormActive()) return $('#createcharacter');
       else return null;
     },
-    loginFormActive: function () {
+    loginFormActive: function() {
       return $('#parchment').hasClass("loadcharacter");
     },
-    createNewCharacterFormActive: function () {
+    createNewCharacterFormActive: function() {
       return $('#parchment').hasClass("createcharacter");
     },
     /**
@@ -190,7 +190,7 @@ define(['jquery', 'storage'], function ($, Storage) {
      * out, passwords match, email looks valid). Assumes either the login or the create new character form
      * is currently active.
      */
-    validateFormFields: function (username, userpw, userpw2, email) {
+    validateFormFields: function(username, userpw, userpw2, email) {
       this.clearValidationErrors();
       if (!username) {
         this.addValidationError(this.getUsernameField(), 'Please enter a username.');
@@ -200,7 +200,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         this.addValidationError(this.getPasswordField(), 'Please enter a password.');
         return false;
       }
-      if (this.createNewCharacterFormActive()) {     // In Create New Character form (rather than login form)
+      if (this.createNewCharacterFormActive()) { // In Create New Character form (rather than login form)
         if (!userpw2) {
           this.addValidationError(this.$pwinput2, 'Please confirm your password by typing it again.');
           return false;
@@ -217,33 +217,33 @@ define(['jquery', 'storage'], function ($, Storage) {
       }
       return true;
     },
-    validateEmail: function (email) {
+    validateEmail: function(email) {
       // Regex borrowed from http://stackoverflow.com/a/46181/393005
       var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
-    addValidationError: function (field, errorText) {
+    addValidationError: function(field, errorText) {
       $('<span/>', {
         'class': 'validation-error blink',
         text: errorText
       }).appendTo('.validation-summary');
       if (field) {
         field.addClass('field-error').select();
-        field.bind('keypress', function (event) {
+        field.bind('keypress', function(event) {
           field.removeClass('field-error');
           $('.validation-error').remove();
           $(this).unbind(event);
         });
       }
     },
-    clearValidationErrors: function () {
+    clearValidationErrors: function() {
       var fields = this.loginFormActive() ? this.loginFormFields : this.createNewCharacterFormFields;
-      $.each(fields, function (i, field) {
+      $.each(fields, function(i, field) {
         field.removeClass('field-error');
       });
       $('.validation-error').remove();
     },
-    setMouseCoordinates: function (event) {
+    setMouseCoordinates: function(event) {
       var gamePos = $('#container').offset(),
         scale = this.game.renderer.getScaleFactor(),
         width = this.game.renderer.getWidth(),
@@ -263,12 +263,12 @@ define(['jquery', 'storage'], function ($, Storage) {
       }
     },
     //Init the hud that makes it show what creature you are mousing over and attacking
-    initTargetHud: function () {
+    initTargetHud: function() {
       var self = this;
       var scale = self.game.renderer.getScaleFactor(),
         healthMaxWidth = $("#inspector .health").width() - (12 * scale),
         timeout;
-      this.game.player.onSetTarget(function (target, name, mouseover) {
+      this.game.player.onSetTarget(function(target, name, mouseover) {
         var el = '#inspector';
         var sprite = target.sprite,
           x = ((sprite.animationData.idle_down.length - 1) * sprite.width),
@@ -283,45 +283,44 @@ define(['jquery', 'storage'], function ($, Storage) {
         var level = Types.getMobLevel(Types.getKindFromString(name));
         if (level !== undefined) {
           $(el + ' .level').text("Level " + level);
-        }
-        else {
+        } else {
           $('#inspector .level').text('');
         }
         $(el).fadeIn('fast');
       });
-      self.game.onUpdateTarget(function (target) {
+      self.game.onUpdateTarget(function(target) {
         $("#inspector .health").css('width', Math.round(target.healthPoints / target.maxHp * 100) + "%");
       });
-      self.game.player.onRemoveTarget(function (targetId) {
+      self.game.player.onRemoveTarget(function(targetId) {
         $('#inspector').fadeOut('fast');
         $('#inspector .level').text('');
         self.game.player.inspecting = null;
       });
     },
-    initExpBar: function () {
+    initExpBar: function() {
       var maxHeight = $("#expbar").height();
-      this.game.onPlayerExpChange(function (expInThisLevel, expForLevelUp) {
+      this.game.onPlayerExpChange(function(expInThisLevel, expForLevelUp) {
         var barHeight = Math.round((maxHeight / expForLevelUp) * (expInThisLevel > 0 ? expInThisLevel : 0));
         $("#expbar").css('height', barHeight + "px");
       });
     },
-    initHealthBar: function () {
+    initHealthBar: function() {
       var scale = this.game.renderer.getScaleFactor(),
         healthMaxWidth = $("#healthbar").width() - (12 * scale);
-      this.game.onPlayerHealthChange(function (hp, maxHp) {
+      this.game.onPlayerHealthChange(function(hp, maxHp) {
         var barWidth = Math.round((healthMaxWidth / maxHp) * (hp > 0 ? hp : 0));
         $("#hitpoints").css('width', barWidth + "px");
       });
       this.game.onPlayerHurt(this.blinkHealthBar.bind(this));
     },
-    blinkHealthBar: function () {
+    blinkHealthBar: function() {
       var $hitpoints = $('#hitpoints');
       $hitpoints.addClass('white');
-      setTimeout(function () {
+      setTimeout(function() {
         $hitpoints.removeClass('white');
       }, 500)
     },
-    toggleButton: function () {
+    toggleButton: function() {
       var name = $('#parchment input').val(),
         $play = $('#createcharacter .play');
       if (name && name.length > 0) {
@@ -332,35 +331,40 @@ define(['jquery', 'storage'], function ($, Storage) {
         $('#character').addClass('disabled');
       }
     },
-    hideIntro: function () {
+    hideIntro: function() {
       clearInterval(this.watchNameInputInterval);
       $('body').removeClass('intro');
-      setTimeout(function () {
+      setTimeout(function() {
         $('body').addClass('game');
       }, 500);
     },
-    showChat: function () {
+    showChat: function() {
       if (this.game.started) {
         $('#chatbox').addClass('active');
         $('#chatinput').focus();
         $('#chatbutton').addClass('active');
       }
     },
-    hideChat: function () {
+    hideChat: function() {
       if (this.game.started) {
         $('#chatbox').removeClass('active');
         $('#chatinput').blur();
         $('#chatbutton').removeClass('active');
       }
     },
-    toggleInstructions: function () {
+    toggleInstructions: function() {
       if ($('#achievements').hasClass('active')) {
         this.toggleAchievements();
         $('#achievementsbutton').removeClass('active');
       }
       $('#instructions').toggleClass('active');
     },
-    toggleAchievements: function () {
+    toggleShop: function() {
+      console.log('toggleShop');
+      $('#shop').toggleClass('active');
+    },
+
+    toggleAchievements: function() {
       if ($('#instructions').hasClass('active')) {
         this.toggleInstructions();
         $('#helpbutton').removeClass('active');
@@ -368,20 +372,20 @@ define(['jquery', 'storage'], function ($, Storage) {
       this.resetPage();
       $('#achievements').toggleClass('active');
     },
-    resetPage: function () {
+    resetPage: function() {
       var self = this,
         $achievements = $('#achievements');
       if ($achievements.hasClass('active')) {
-        $achievements.bind(TRANSITIONEND, function () {
+        $achievements.bind(TRANSITIONEND, function() {
           $achievements.removeClass('page' + self.currentPage).addClass('page1');
           self.currentPage = 1;
           $achievements.unbind(TRANSITIONEND);
         });
       }
     },
-    initEquipmentIcons: function () {
+    initEquipmentIcons: function() {
       var scale = this.game.renderer.getScaleFactor(),
-        getIconPath = function (spriteName) {
+        getIconPath = function(spriteName) {
           return 'img/' + scale + '/item-' + spriteName + '.png';
         },
         weapon = this.game.player.getWeaponName(),
@@ -393,11 +397,16 @@ define(['jquery', 'storage'], function ($, Storage) {
         $('#armor').css('background-image', 'url("' + armorPath + '")');
       }
     },
-    hideWindows: function () {
+    hideWindows: function() {
       if ($('#achievements').hasClass('active')) {
         this.toggleAchievements();
         $('#achievementsbutton').removeClass('active');
       }
+
+      if ($('#shop').hasClass('active')) {
+        $('#shop').removeClass('active');
+      }
+
       if ($('#instructions').hasClass('active')) {
         this.toggleInstructions();
         $('#helpbutton').removeClass('active');
@@ -412,23 +421,23 @@ define(['jquery', 'storage'], function ($, Storage) {
         this.closeInGameScroll('about');
       }
     },
-    showAchievementNotification: function (id, name) {
+    showAchievementNotification: function(id, name) {
       var $notif = $('#achievement-notification'),
         $name = $notif.find('.name'),
         $button = $('#achievementsbutton');
       $notif.removeClass().addClass('active achievement' + id);
       $name.text(name);
       if (this.game.storage.getAchievementCount() === 1) {
-        this.blinkInterval = setInterval(function () {
+        this.blinkInterval = setInterval(function() {
           $button.toggleClass('blink');
         }, 500);
       }
-      setTimeout(function () {
+      setTimeout(function() {
         $notif.removeClass('active');
         $button.removeClass('blink');
       }, 5000);
     },
-    displayUnlockedAchievement: function (id) {
+    displayUnlockedAchievement: function(id) {
       var $achievement = $('#achievements li.achievement' + id),
         achievement = this.game.getAchievementById(id);
       if (achievement && achievement.hidden) {
@@ -436,13 +445,13 @@ define(['jquery', 'storage'], function ($, Storage) {
       }
       $achievement.addClass('unlocked');
     },
-    unlockAchievement: function (id, name) {
+    unlockAchievement: function(id, name) {
       this.showAchievementNotification(id, name);
       this.displayUnlockedAchievement(id);
       var nb = parseInt($('#unlocked-achievements').text());
       $('#unlocked-achievements').text(nb + 1);
     },
-    initAchievementList: function (achievements) {
+    initAchievementList: function(achievements) {
       var self = this,
         $lists = $('#lists'),
         $page = $('#page-tmpl'),
@@ -450,7 +459,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         page = 0,
         count = 0,
         $p = null;
-      _.each(achievements, function (achievement) {
+      _.each(achievements, function(achievement) {
         count++;
         var $a = $achievement.clone();
         $a.removeAttr('id');
@@ -460,7 +469,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         }
         $a.find('.twitter').attr('href', 'http://twitter.com/share?url=http%3A%2F%2Fbrowserquest.mozilla.org&text=I%20unlocked%20the%20%27' + achievement.name + '%27%20achievement%20on%20Mozilla%27s%20%23BrowserQuest%21&related=glecollinet:Creators%20of%20BrowserQuest%2Cwhatthefranck');
         $a.show();
-        $a.find('a').click(function () {
+        $a.find('a').click(function() {
           var url = $(this).attr('href');
           self.openPopup('twitter', url);
           return false;
@@ -476,18 +485,18 @@ define(['jquery', 'storage'], function ($, Storage) {
       });
       $('#total-achievements').text($('#achievements').find('li').length);
     },
-    initUnlockedAchievements: function (ids) {
+    initUnlockedAchievements: function(ids) {
       var self = this;
-      _.each(ids, function (id) {
+      _.each(ids, function(id) {
         self.displayUnlockedAchievement(id);
       });
       $('#unlocked-achievements').text(ids.length);
     },
-    setAchievementData: function ($el, name, desc) {
+    setAchievementData: function($el, name, desc) {
       $el.find('.achievement-name').html(name);
       $el.find('.achievement-description').html(desc);
     },
-    toggleScrollContent: function (content) {
+    toggleScrollContent: function(content) {
       var currentState = $('#parchment').attr('class');
       if (this.game.started) {
         $('#parchment').removeClass().addClass(content);
@@ -508,7 +517,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         }
       }
     },
-    closeInGameScroll: function (content) {
+    closeInGameScroll: function(content) {
       $('body').removeClass(content);
       $('#parchment').removeClass(content);
       if (!this.game.player) {
@@ -518,10 +527,10 @@ define(['jquery', 'storage'], function ($, Storage) {
         $('#helpbutton').removeClass('active');
       }
     },
-    togglePopulationInfo: function () {
+    togglePopulationInfo: function() {
       $('#population').toggleClass('visible');
     },
-    openPopup: function (type, url) {
+    openPopup: function(type, url) {
       var h = $(window).height(),
         w = $(window).width(),
         popupHeight,
@@ -545,7 +554,7 @@ define(['jquery', 'storage'], function ($, Storage) {
         newwindow.focus()
       }
     },
-    animateParchment: function (origin, destination) {
+    animateParchment: function(origin, destination) {
       var self = this,
         $parchment = $('#parchment'),
         duration = 1;
@@ -559,27 +568,27 @@ define(['jquery', 'storage'], function ($, Storage) {
           this.isParchmentReady = !this.isParchmentReady;
           $parchment.toggleClass('animate');
           $parchment.removeClass(origin);
-          setTimeout(function () {
+          setTimeout(function() {
             $('#parchment').toggleClass('animate');
             $parchment.addClass(destination);
           }, duration * 1000);
-          setTimeout(function () {
+          setTimeout(function() {
             self.isParchmentReady = !self.isParchmentReady;
           }, duration * 1000);
         }
       }
     },
-    animateMessages: function () {
+    animateMessages: function() {
       var $messages = $('#notifications div');
       $messages.addClass('top');
     },
-    resetMessagesPosition: function () {
+    resetMessagesPosition: function() {
       var message = $('#message2').text();
       $('#notifications div').removeClass('top');
       $('#message2').text('');
       $('#message1').text(message);
     },
-    showMessage: function (message) {
+    showMessage: function(message) {
       var $wrapper = $('#notifications div'),
         $message = $('#notifications #message2');
       this.animateMessages();
@@ -587,14 +596,14 @@ define(['jquery', 'storage'], function ($, Storage) {
       if (this.messageTimer) {
         this.resetMessageTimer();
       }
-      this.messageTimer = setTimeout(function () {
+      this.messageTimer = setTimeout(function() {
         $wrapper.addClass('top');
       }, 5000);
     },
-    resetMessageTimer: function () {
+    resetMessageTimer: function() {
       clearTimeout(this.messageTimer);
     },
-    resizeUi: function () {
+    resizeUi: function() {
       if (this.game) {
         if (this.game.started) {
           this.game.resize();

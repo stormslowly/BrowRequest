@@ -9,39 +9,68 @@
     margin-left: 0px;
     padding: 4px;
     border-radius: 0 0 6px 0;
+    z-index: 30000;
 }
 
-.infoboard:hover{
+.infoboard:hover {
     background-color: rgba(0, 0, 0, 0.93);
 }
 
-#buybutton{
-    width:30px;
+#buybutton {
+    width: 30px;
     height: 100%;
     display: inline-block;
+    z-index: 30001;
+    background-image: url('../img/common/cz.gif');
+    background-repeat:no-repeat;
 }
 
-.level,.viplevel{
+@keyframes butblink {
+   from {
+        background-image-x: 0px;
+    }
+   to {
+        background-image-x: 32px;;
+       background-repeat: repeat-x;
+    }
+}
+
+@-webkit-keyframes butblink {
+    from {
+        background-image-x: 0px;
+    }
+    to {
+       background-repeat: repeat-x;
+       background-image-x: 32px;;
+    }
+}
+
+#buybutton:hover{
+    -webkit-animation: butblink 0.3s linear 5 alternate;
+    -moz-animation: butblink 0.3s linear 5 alternate;
+    animation: butblink 0.3s linear 5 alternate;
+}
+
+.level, .viplevel {
     margin-left: 10px;
     height: 20px;
 }
 
-.levelvalue{
+.levelvalue {
     width: 25px;
     display: inline-block;
     text-align: right;
 }
 
-.level .head{
+.level .head {
     margin-right: 5px;
     display: inline-block;
 }
 
-#viplevel .head{
+#viplevel .head {
     color: #BC7A00;
     text-shadow: #E8F0B4 -1px -1px;
 }
-
 
 #shoparea {
     font-family: 'GraphicPixel';
@@ -57,7 +86,6 @@
 }
 
 #shoparea .title {
-
 }
 
 .spark {
@@ -68,3 +96,72 @@
     -ms-animation: logo3 .8s steps(6, end) infinite;
 }
 
+#shop {
+    background: url('../img/2/spritesheet.png');
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+#shop {
+    height: 344px;
+    width: 834px;
+    background-position: 0 -1054px;
+    margin-left: -416px;
+    margin-top: -186px;
+    color: #373737;
+}
+
+#shop {
+    font-family: 'GraphicPixel';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    -moz-transition: 0.25s opacity linear;
+    -webkit-transition: 0.4s top ease, 0.4s opacity linear;
+    -o-transition: 0.4s top ease, 0.4s opacity linear;
+    -ms-transition: 0.4s top ease, 0.4s opacity linear;
+    transition: 0.4s top ease, 0.4s opacity linear;
+}
+
+#shop h1 {
+    font-size: 30px;
+    text-align: center;
+    margin: 40px 0;
+}
+
+#shop ul {
+    font-size: 25px;
+    margin-top: 40px;
+}
+
+.gold {
+    display: inline-block;
+    height: 30px;
+    width: 35px;
+    background-image: url('../img/common/gold.png');
+}
+
+
+#shop ul li {
+    font-size: 40px;
+    margin-left: 110px;
+    margin-bottom: 10px;
+}
+
+#shop ul li:hover{
+    margin-left: 90px;
+}
+
+
+#shop ul li small {
+    font-size: 20px;
+}
+
+#shop.active {
+    z-index: 30000;
+    opacity: 1;
+    pointer-events: auto;
+}
