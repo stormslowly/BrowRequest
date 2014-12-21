@@ -72,14 +72,14 @@
     text-shadow: #E8F0B4 -1px -1px;
 }
 
-#shoparea {
+#pkarea {
     font-family: 'GraphicPixel';
     color: #e3e3e3;
     background-color: rgba(0, 0, 0, 0.43);
     position: absolute;
     top: 15px;
     right: 15px;
-    width: 140px;
+    width: 90px;
     margin-left: 0px;
     padding: 4px;
     border-radius: 0 0 6px 0;
