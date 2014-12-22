@@ -1,4 +1,3 @@
-
 Types = {
     Messages: {
         CREATE: 0,
@@ -33,25 +32,25 @@ Types = {
         GUILD: 29,
         GUILDERROR: 30,
         GUILDERRORTYPE: {
-        	DOESNOTEXIST: 1,
-        	BADNAME: 2,
-        	ALREADYEXISTS: 3,
-        	NOLEAVE: 4,
-        	BADINVITE: 5,
-        	GUILDRULES: 6,
-        	IDWARNING: 7
+            DOESNOTEXIST: 1,
+            BADNAME: 2,
+            ALREADYEXISTS: 3,
+            NOLEAVE: 4,
+            BADINVITE: 5,
+            GUILDRULES: 6,
+            IDWARNING: 7
         },
         GUILDACTION: {
-			CONNECT: 8,
-			ONLINE: 9,
-			DISCONNECT: 10,
-			INVITE: 11,
-			LEAVE: 12,
-			CREATE: 13,
-			TALK: 14,
-			JOIN: 15,
-			POPULATION: 16
-		}
+            CONNECT: 8,
+            ONLINE: 9,
+            DISCONNECT: 10,
+            INVITE: 11,
+            LEAVE: 12,
+            CREATE: 13,
+            TALK: 14,
+            JOIN: 15,
+            POPULATION: 16
+        }
     },
 
     Entities: {
@@ -204,10 +203,10 @@ var kinds = {
     getType: function(kind) {
         return kinds[Types.getKindAsString(kind)][1];
     },
-    getMobExp: function(kind){
+    getMobExp: function(kind) {
         return kinds[Types.getKindAsString(kind)][2];
     },
-    getMobLevel: function(kind){
+    getMobLevel: function(kind) {
         return kinds[Types.getKindAsString(kind)][3];
     }
 
@@ -281,10 +280,10 @@ Types.expForLevel = [
     108243216,
 ];
 
-Types.getLevel = function(exp){
-    var i=1;
-    for(i=1; i<135; i++){
-        if(exp < Types.expForLevel[i]){
+Types.getLevel = function(exp) {
+    var i = 1;
+    for (i = 1; i < 135; i++) {
+        if (exp < Types.expForLevel[i]) {
             return i;
         }
     }
@@ -297,10 +296,10 @@ Types.getWeaponRank = function(weaponKind) {
 Types.getArmorRank = function(armorKind) {
     return _.indexOf(Types.rankedArmors, armorKind);
 };
-Types.getMobExp = function(mobKind){
+Types.getMobExp = function(mobKind) {
     return kinds.getMobExp(mobKind);
 };
-Types.getMobLevel = function(mobKind){
+Types.getMobLevel = function(mobKind) {
     return kinds.getMobLevel(mobKind);
 };
 
@@ -337,45 +336,40 @@ Types.isChest = function(kind) {
 };
 
 Types.isItem = function(kind) {
-    return Types.isWeapon(kind)
-        || Types.isArmor(kind)
-        || (Types.isObject(kind) && !Types.isChest(kind));
+    return Types.isWeapon(kind) || Types.isArmor(kind) || (Types.isObject(kind) && !Types.isChest(kind));
 };
 
 Types.isHealingItem = function(kind) {
-    return kind === Types.Entities.FLASK
-        || kind === Types.Entities.BURGER;
+    return kind === Types.Entities.FLASK || kind === Types.Entities.BURGER;
 };
 
 Types.isExpendableItem = function(kind) {
-    return Types.isHealingItem(kind)
-        || kind === Types.Entities.FIREPOTION
-        || kind === Types.Entities.CAKE;
+    return Types.isHealingItem(kind) || kind === Types.Entities.FIREPOTION || kind === Types.Entities.CAKE;
 };
 
 Types.getKindFromString = function(kind) {
-    if(kind in kinds) {
+    if (kind in kinds) {
         return kinds[kind][0];
     }
 };
 
 Types.getKindAsString = function(kind) {
-    for(var k in kinds) {
-        if(kinds[k][0] === kind) {
+    for (var k in kinds) {
+        if (kinds[k][0] === kind) {
             return k;
         }
     }
 };
 
 Types.forEachKind = function(callback) {
-    for(var k in kinds) {
+    for (var k in kinds) {
         callback(kinds[k][0], k);
     }
 };
 
 Types.forEachArmor = function(callback) {
     Types.forEachKind(function(kind, kindName) {
-        if(Types.isArmor(kind)) {
+        if (Types.isArmor(kind)) {
             callback(kind, kindName);
         }
     });
@@ -383,7 +377,7 @@ Types.forEachArmor = function(callback) {
 
 Types.forEachMobOrNpcKind = function(callback) {
     Types.forEachKind(function(kind, kindName) {
-        if(Types.isMob(kind) || Types.isNpc(kind)) {
+        if (Types.isMob(kind) || Types.isNpc(kind)) {
             callback(kind, kindName);
         }
     });
@@ -391,25 +385,33 @@ Types.forEachMobOrNpcKind = function(callback) {
 
 Types.forEachArmorKind = function(callback) {
     Types.forEachKind(function(kind, kindName) {
-        if(Types.isArmor(kind)) {
+        if (Types.isArmor(kind)) {
             callback(kind, kindName);
         }
     });
 };
 Types.forEachWeaponKind = function(callback) {
     Types.forEachKind(function(kind, kindName) {
-        if(Types.isWeapon(kind)) {
+        if (Types.isWeapon(kind)) {
             callback(kind, kindName);
         }
     });
 };
 
 Types.getOrientationAsString = function(orientation) {
-    switch(orientation) {
-        case Types.Orientations.LEFT: return "left"; break;
-        case Types.Orientations.RIGHT: return "right"; break;
-        case Types.Orientations.UP: return "up"; break;
-        case Types.Orientations.DOWN: return "down"; break;
+    switch (orientation) {
+        case Types.Orientations.LEFT:
+            return "left";
+            break;
+        case Types.Orientations.RIGHT:
+            return "right";
+            break;
+        case Types.Orientations.UP:
+            return "up";
+            break;
+        case Types.Orientations.DOWN:
+            return "down";
+            break;
     }
 };
 
@@ -425,16 +427,16 @@ Types.getRandomItemKind = function(item) {
 Types.getMessageTypeAsString = function(type) {
     var typeName;
     _.each(Types.Messages, function(value, name) {
-        if(value === type) {
+        if (value === type) {
             typeName = name;
         }
     });
-    if(!typeName) {
+    if (!typeName) {
         typeName = "UNKNOWN";
     }
     return typeName;
 };
 
-if(!(typeof exports === 'undefined')) {
+if (!(typeof exports === 'undefined')) {
     module.exports = Types;
 }

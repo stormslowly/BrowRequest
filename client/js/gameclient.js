@@ -1,6 +1,6 @@
-define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory, BISON) {
+define(['player', 'entityfactory', 'lib/bison'], function(Player, EntityFactory, BISON) {
   var GameClient = Class.extend({
-    init: function (host, port) {
+    init: function(host, port) {
       this.connection = null;
       this.host = host;
       this.port = port;
@@ -35,13 +35,13 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
       this.useBison = false;
       this.enable();
     },
-    enable: function () {
+    enable: function() {
       this.isListening = true;
     },
-    disable: function () {
+    disable: function() {
       this.isListening = false;
     },
-    connect: function (dispatcherMode) {
+    connect: function(dispatcherMode) {
       var url = "ws://" + this.host + ":" + this.port + "/",
         self = this;
       log.info("Trying to connect to server : " + url);
@@ -51,7 +51,7 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.connection = new WebSocket(url);
       }
       if (dispatcherMode) {
-        this.connection.onmessage = function (e) {
+        this.connection.onmessage = function(e) {
           var reply = JSON.parse(e.data);
           if (reply.status === 'OK') {
             self.dispatched_callback(reply.host, reply.port);
@@ -62,10 +62,10 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
           }
         };
       } else {
-        this.connection.onopen = function (e) {
+        this.connection.onopen = function(e) {
           log.info("Connected to server " + self.host + ":" + self.port);
         };
-        this.connection.onmessage = function (e) {
+        this.connection.onmessage = function(e) {
           if (e.data === "go") {
             if (self.connected_callback) {
               self.connected_callback();
@@ -84,23 +84,23 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
           }
           self.receiveMessage(e.data);
         };
-        this.connection.onerror = function (e) {
+        this.connection.onerror = function(e) {
           log.error(e, true);
         };
-        this.connection.onclose = function () {
+        this.connection.onclose = function() {
           log.debug("Connection closed");
           $('#container').addClass('error');
           if (self.disconnected_callback) {
             if (self.isTimeout) {
-              self.disconnected_callback("You have been disconnected for being inactive for too long");
+              self.disconnected_callback("你很久没有活动了 已经和服务器断开");
             } else {
-              self.disconnected_callback("The connection to BrowserQuest has been lost");
+              self.disconnected_callback("无法连接掉服务器!");
             }
           }
         };
       }
     },
-    sendMessage: function (json) {
+    sendMessage: function(json) {
       var data;
       if (this.connection.readyState === 1) {
         if (this.useBison) {
@@ -111,7 +111,7 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.connection.send(data);
       }
     },
-    receiveMessage: function (message) {
+    receiveMessage: function(message) {
       var data, action;
       if (this.isListening) {
         if (this.useBison) {
@@ -131,22 +131,21 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         }
       }
     },
-    receiveAction: function (data) {
+    receiveAction: function(data) {
       var action = data[0];
       if (this.handlers[action] && _.isFunction(this.handlers[action])) {
         this.handlers[action].call(this, data);
-      }
-      else {
+      } else {
         log.error("Unknown action : " + action);
       }
     },
-    receiveActionBatch: function (actions) {
+    receiveActionBatch: function(actions) {
       var self = this;
-      _.each(actions, function (action) {
+      _.each(actions, function(action) {
         self.receiveAction(action);
       });
     },
-    receiveWelcome: function (data) {
+    receiveWelcome: function(data) {
       var id = data[1],
         name = data[2],
         x = data[3],
@@ -161,7 +160,7 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.welcome_callback(id, name, x, y, hp, armor, weapon, avatar, weaponAvatar, experience);
       }
     },
-    receiveMove: function (data) {
+    receiveMove: function(data) {
       var id = data[1],
         x = data[2],
         y = data[3];
@@ -169,21 +168,21 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.move_callback(id, x, y);
       }
     },
-    receiveLootMove: function (data) {
+    receiveLootMove: function(data) {
       var id = data[1],
         item = data[2];
       if (this.lootmove_callback) {
         this.lootmove_callback(id, item);
       }
     },
-    receiveAttack: function (data) {
+    receiveAttack: function(data) {
       var attacker = data[1],
         target = data[2];
       if (this.attack_callback) {
         this.attack_callback(attacker, target);
       }
     },
-    receiveSpawn: function (data) {
+    receiveSpawn: function(data) {
       var id = data[1],
         kind = data[2],
         x = data[3],
@@ -208,8 +207,7 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
           if (data.length > 9) {
             target = data[9];
           }
-        }
-        else if (Types.isMob(kind)) {
+        } else if (Types.isMob(kind)) {
           orientation = data[5];
           if (data.length > 6) {
             target = data[6];
@@ -225,13 +223,13 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         }
       }
     },
-    receiveDespawn: function (data) {
+    receiveDespawn: function(data) {
       var id = data[1];
       if (this.despawn_callback) {
         this.despawn_callback(id);
       }
     },
-    receiveHealth: function (data) {
+    receiveHealth: function(data) {
       var points = data[1],
         isRegen = false;
       if (data[2]) {
@@ -241,21 +239,21 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.health_callback(points, isRegen);
       }
     },
-    receiveChat: function (data) {
+    receiveChat: function(data) {
       var id = data[1],
         text = data[2];
       if (this.chat_callback) {
         this.chat_callback(id, text);
       }
     },
-    receiveEquipItem: function (data) {
+    receiveEquipItem: function(data) {
       var id = data[1],
         itemKind = data[2];
       if (this.equip_callback) {
         this.equip_callback(id, itemKind);
       }
     },
-    receiveDrop: function (data) {
+    receiveDrop: function(data) {
       var mobId = data[1],
         id = data[2],
         kind = data[3],
@@ -266,7 +264,7 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.drop_callback(item, mobId);
       }
     },
-    receiveTeleport: function (data) {
+    receiveTeleport: function(data) {
       var id = data[1],
         x = data[2],
         y = data[3];
@@ -274,7 +272,7 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.teleport_callback(id, x, y);
       }
     },
-    receiveDamage: function (data) {
+    receiveDamage: function(data) {
       var id = data[1],
         dmg = data[2];
       hp = parseInt(data[3]),
@@ -283,14 +281,14 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.dmg_callback(id, dmg, hp, maxHp);
       }
     },
-    receivePopulation: function (data) {
+    receivePopulation: function(data) {
       var worldPlayers = data[1],
         totalPlayers = data[2];
       if (this.population_callback) {
         this.population_callback(worldPlayers, totalPlayers);
       }
     },
-    receiveKill: function (data) {
+    receiveKill: function(data) {
       var mobKind = data[1];
       var level = data[2];
       var exp = data[3];
@@ -298,194 +296,188 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
         this.kill_callback(mobKind, level, exp);
       }
     },
-    receiveList: function (data) {
+    receiveList: function(data) {
       data.shift();
       if (this.list_callback) {
         this.list_callback(data);
       }
     },
-    receiveDestroy: function (data) {
+    receiveDestroy: function(data) {
       var id = data[1];
       if (this.destroy_callback) {
         this.destroy_callback(id);
       }
     },
-    receiveHitPoints: function (data) {
+    receiveHitPoints: function(data) {
       var maxHp = data[1];
       if (this.hp_callback) {
         this.hp_callback(maxHp);
       }
     },
-    receiveBlink: function (data) {
+    receiveBlink: function(data) {
       var id = data[1];
       if (this.blink_callback) {
         this.blink_callback(id);
       }
     },
-    receivePVP: function (data) {
+    receivePVP: function(data) {
       var pvp = data[1];
       if (this.pvp_callback) {
         this.pvp_callback(pvp);
       }
     },
-    receiveGuildError: function (data) {
+    receiveGuildError: function(data) {
       var errorType = data[1];
       var guildName = data[2];
       if (this.guilderror_callback) {
         this.guilderror_callback(errorType, guildName);
       }
     },
-    receiveGuild: function (data) {
+    receiveGuild: function(data) {
       if ((data[1] === Types.Messages.GUILDACTION.CONNECT) &&
         this.guildmemberconnect_callback) {
         this.guildmemberconnect_callback(data[2]); //member name
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.DISCONNECT) &&
+      } else if ((data[1] === Types.Messages.GUILDACTION.DISCONNECT) &&
         this.guildmemberdisconnect_callback) {
         this.guildmemberdisconnect_callback(data[2]); //member name
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.ONLINE) &&
+      } else if ((data[1] === Types.Messages.GUILDACTION.ONLINE) &&
         this.guildonlinemembers_callback) {
         data.splice(0, 2);
         this.guildonlinemembers_callback(data); //member names
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.CREATE) &&
+      } else if ((data[1] === Types.Messages.GUILDACTION.CREATE) &&
         this.guildcreate_callback) {
-        this.guildcreate_callback(data[2], data[3]);//id, name
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.INVITE) &&
+        this.guildcreate_callback(data[2], data[3]); //id, name
+      } else if ((data[1] === Types.Messages.GUILDACTION.INVITE) &&
         this.guildinvite_callback) {
-        this.guildinvite_callback(data[2], data[3], data[4]);//id, name, invitor name
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.POPULATION) &&
+        this.guildinvite_callback(data[2], data[3], data[4]); //id, name, invitor name
+      } else if ((data[1] === Types.Messages.GUILDACTION.POPULATION) &&
         this.guildpopulation_callback) {
-        this.guildpopulation_callback(data[2], data[3]);//name, count
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.JOIN) &&
+        this.guildpopulation_callback(data[2], data[3]); //name, count
+      } else if ((data[1] === Types.Messages.GUILDACTION.JOIN) &&
         this.guildjoin_callback) {
-        this.guildjoin_callback(data[2], data[3], data[4], data[5]);//name, (id, (guildId, guildName))
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.LEAVE) &&
+        this.guildjoin_callback(data[2], data[3], data[4], data[5]); //name, (id, (guildId, guildName))
+      } else if ((data[1] === Types.Messages.GUILDACTION.LEAVE) &&
         this.guildleave_callback) {
-        this.guildleave_callback(data[2], data[3], data[4]);//name, id, guildname
-      }
-      else if ((data[1] === Types.Messages.GUILDACTION.TALK) &&
+        this.guildleave_callback(data[2], data[3], data[4]); //name, id, guildname
+      } else if ((data[1] === Types.Messages.GUILDACTION.TALK) &&
         this.guildtalk_callback) {
-        this.guildtalk_callback(data[2], data[3], data[4]);//name, id, message
+        this.guildtalk_callback(data[2], data[3], data[4]); //name, id, message
       }
     },
-    onDispatched: function (callback) {
+    onDispatched: function(callback) {
       this.dispatched_callback = callback;
     },
-    onConnected: function (callback) {
+    onConnected: function(callback) {
       this.connected_callback = callback;
     },
-    onDisconnected: function (callback) {
+    onDisconnected: function(callback) {
       this.disconnected_callback = callback;
     },
-    onWelcome: function (callback) {
+    onWelcome: function(callback) {
       this.welcome_callback = callback;
     },
-    onSpawnCharacter: function (callback) {
+    onSpawnCharacter: function(callback) {
       this.spawn_character_callback = callback;
     },
-    onSpawnItem: function (callback) {
+    onSpawnItem: function(callback) {
       this.spawn_item_callback = callback;
     },
-    onSpawnChest: function (callback) {
+    onSpawnChest: function(callback) {
       this.spawn_chest_callback = callback;
     },
-    onDespawnEntity: function (callback) {
+    onDespawnEntity: function(callback) {
       this.despawn_callback = callback;
     },
-    onEntityMove: function (callback) {
+    onEntityMove: function(callback) {
       this.move_callback = callback;
     },
-    onEntityAttack: function (callback) {
+    onEntityAttack: function(callback) {
       this.attack_callback = callback;
     },
-    onPlayerChangeHealth: function (callback) {
+    onPlayerChangeHealth: function(callback) {
       this.health_callback = callback;
     },
-    onPlayerEquipItem: function (callback) {
+    onPlayerEquipItem: function(callback) {
       this.equip_callback = callback;
     },
-    onPlayerMoveToItem: function (callback) {
+    onPlayerMoveToItem: function(callback) {
       this.lootmove_callback = callback;
     },
-    onPlayerTeleport: function (callback) {
+    onPlayerTeleport: function(callback) {
       this.teleport_callback = callback;
     },
-    onChatMessage: function (callback) {
+    onChatMessage: function(callback) {
       this.chat_callback = callback;
     },
-    onDropItem: function (callback) {
+    onDropItem: function(callback) {
       this.drop_callback = callback;
     },
-    onPlayerDamageMob: function (callback) {
+    onPlayerDamageMob: function(callback) {
       this.dmg_callback = callback;
     },
-      onPlayerKillMob: function (callback) {
+    onPlayerKillMob: function(callback) {
       this.kill_callback = callback;
     },
-    onPopulationChange: function (callback) {
+    onPopulationChange: function(callback) {
       this.population_callback = callback;
     },
-    onEntityList: function (callback) {
+    onEntityList: function(callback) {
       this.list_callback = callback;
     },
-    onEntityDestroy: function (callback) {
+    onEntityDestroy: function(callback) {
       this.destroy_callback = callback;
     },
-    onPlayerChangeMaxHitPoints: function (callback) {
+    onPlayerChangeMaxHitPoints: function(callback) {
       this.hp_callback = callback;
     },
-    onItemBlink: function (callback) {
+    onItemBlink: function(callback) {
       this.blink_callback = callback;
     },
-    onPVPChange: function (callback) {
+    onPVPChange: function(callback) {
       this.pvp_callback = callback;
     },
-    onGuildError: function (callback) {
+    onGuildError: function(callback) {
       this.guilderror_callback = callback;
     },
-    onGuildCreate: function (callback) {
+    onGuildCreate: function(callback) {
       this.guildcreate_callback = callback;
     },
-    onGuildInvite: function (callback) {
+    onGuildInvite: function(callback) {
       this.guildinvite_callback = callback;
     },
-    onGuildJoin: function (callback) {
+    onGuildJoin: function(callback) {
       this.guildjoin_callback = callback;
     },
-    onGuildLeave: function (callback) {
+    onGuildLeave: function(callback) {
       this.guildleave_callback = callback;
     },
-    onGuildTalk: function (callback) {
+    onGuildTalk: function(callback) {
       this.guildtalk_callback = callback;
     },
-    onMemberConnect: function (callback) {
+    onMemberConnect: function(callback) {
       this.guildmemberconnect_callback = callback;
     },
-    onMemberDisconnect: function (callback) {
+    onMemberDisconnect: function(callback) {
       this.guildmemberdisconnect_callback = callback;
     },
-    onReceiveGuildMembers: function (callback) {
+    onReceiveGuildMembers: function(callback) {
       this.guildonlinemembers_callback = callback;
     },
-    onGuildPopulation: function (callback) {
+    onGuildPopulation: function(callback) {
       this.guildpopulation_callback = callback;
     },
-    sendCreate: function (player) {
+    sendCreate: function(player) {
       this.sendMessage([Types.Messages.CREATE,
         player.name,
         player.pw,
-        player.email]);
+        player.email
+      ]);
     },
-    sendLogin: function (player) {
+    sendLogin: function(player) {
       this.sendMessage([Types.Messages.LOGIN,
         player.name,
-        player.pw]);
+        player.pw
+      ]);
     },
     //  sendHello: function(player) {
     //if(player.hasGuild()){
@@ -506,74 +498,85 @@ define(['player', 'entityfactory', 'lib/bison'], function (Player, EntityFactory
     //Types.getKindFromString(player.getWeaponName())]);
     //}
     // },
-    sendMove: function (x, y) {
+    sendMove: function(x, y) {
       this.sendMessage([Types.Messages.MOVE,
         x,
-        y]);
+        y
+      ]);
     },
-    sendLootMove: function (item, x, y) {
+    sendLootMove: function(item, x, y) {
       this.sendMessage([Types.Messages.LOOTMOVE,
         x,
         y,
-        item.id]);
+        item.id
+      ]);
     },
-    sendAggro: function (mob) {
+    sendAggro: function(mob) {
       this.sendMessage([Types.Messages.AGGRO,
-        mob.id]);
+        mob.id
+      ]);
     },
-    sendAttack: function (mob) {
+    sendAttack: function(mob) {
       this.sendMessage([Types.Messages.ATTACK,
-        mob.id]);
+        mob.id
+      ]);
     },
-    sendHit: function (mob) {
+    sendHit: function(mob) {
       this.sendMessage([Types.Messages.HIT,
-        mob.id]);
+        mob.id
+      ]);
     },
-    sendHurt: function (mob) {
+    sendHurt: function(mob) {
       this.sendMessage([Types.Messages.HURT,
-        mob.id]);
+        mob.id
+      ]);
     },
-    sendChat: function (text) {
+    sendChat: function(text) {
       this.sendMessage([Types.Messages.CHAT,
-        text]);
+        text
+      ]);
     },
-    sendLoot: function (item) {
+    sendLoot: function(item) {
       this.sendMessage([Types.Messages.LOOT,
-        item.id]);
+        item.id
+      ]);
     },
-    sendTeleport: function (x, y) {
+    sendTeleport: function(x, y) {
       this.sendMessage([Types.Messages.TELEPORT,
         x,
-        y]);
+        y
+      ]);
     },
-    sendZone: function () {
+    sendZone: function() {
       this.sendMessage([Types.Messages.ZONE]);
     },
-    sendOpen: function (chest) {
+    sendOpen: function(chest) {
       this.sendMessage([Types.Messages.OPEN,
-        chest.id]);
+        chest.id
+      ]);
     },
-    sendCheck: function (id) {
+    sendCheck: function(id) {
       this.sendMessage([Types.Messages.CHECK,
-        id]);
+        id
+      ]);
     },
-    sendWho: function (ids) {
+    sendWho: function(ids) {
       ids.unshift(Types.Messages.WHO);
       this.sendMessage(ids);
     },
-    sendNewGuild: function (name) {
+    sendNewGuild: function(name) {
       this.sendMessage([Types.Messages.GUILD, Types.Messages.GUILDACTION.CREATE, name]);
     },
-    sendGuildInvite: function (invitee) {
+    sendGuildInvite: function(invitee) {
       this.sendMessage([Types.Messages.GUILD, Types.Messages.GUILDACTION.INVITE, invitee]);
     },
-    sendGuildInviteReply: function (guild, answer) {
+    sendGuildInviteReply: function(guild, answer) {
       this.sendMessage([Types.Messages.GUILD, Types.Messages.GUILDACTION.JOIN, guild, answer]);
     },
-    talkToGuild: function (message) {
+    talkToGuild: function(message) {
       this.sendMessage([Types.Messages.GUILD, Types.Messages.GUILDACTION.TALK, message]);
     },
-    sendLeaveGuild: function () {
+    sendLeaveGuild: function() {
       this.sendMessage([Types.Messages.GUILD, Types.Messages.GUILDACTION.LEAVE]);
     }
   });

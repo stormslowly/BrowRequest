@@ -180,7 +180,7 @@ define(['jquery', 'app', 'entrypoint'], function($, App, EntryPoint) {
         entry.execute(game);
       });
       game.onDisconnect(function(message) {
-        $('#death').find('p').html(message + "<em>Please reload the page.</em>");
+        $('#death').find('p').html(message + "<em>请刷新本页面.</em>");
         $('#respawn').hide();
       });
       game.onPlayerDeath(function() {

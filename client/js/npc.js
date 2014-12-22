@@ -2,102 +2,90 @@ define(['character'], function(Character) {
 
     var NpcTalk = {
         "guard": [
-            "Hello there",
-            "We don't need to see your identification",
-            "You are not the player we're looking for",
-            "Move along, move along..."
+            "你好",
+            "你就是我们所寻找的那个人",
+            "来吧年轻人，和我来吧..."
         ],
 
         "king": [
-            "Hi, I'm the King",
-            "I run this place",
-            "Like a boss",
-            "I talk to people",
-            "Like a boss",
-            "I wear a crown",
-            "Like a boss",
-            "I do nothing all day",
-            "Like a boss",
-            "Now leave me alone",
-            "Like a boss"
+            "我就是这里的王",
+            "这里是我的领土",
+            "看见我的皇冠了",
+            "哈哈，我就这里的王！"
         ],
 
         "villagegirl": [
-            "Hi there, adventurer!",
-            "How do you like this game?",
-            "It's all happening in a single web page! Isn't it crazy?",
-            "It's all made possible thanks to WebSockets.",
-            "I don't know much about it, after all I'm just a program.",
-            'Why don&#x27;t you read this <a target="_blank" href="http://hacks.mozilla.org/2012/03/browserquest/">blog post</a> and learn all about it?'
+            "欢迎 勇士的到来!",
+
         ],
 
         "villager": [
-            "Howdy stranger. Do you like poetry?",
-            "Roses are red, violets are blue...",
-            "I like hunting rats, and so do you...",
-            "The rats are dead, now what to do?",
-            "To be honest, I have no clue.",
-            "Maybe the forest, could interest you...",
-            "or instead, cook a rat stew."
+            "少年，你喜欢诗歌吗?",
+            "枯藤老树昏鸦，",
+            "小桥流水人家，",
+            "古道西风瘦马。",
+            "夕阳西下，",
+            "断肠人在天涯。 ",
+            "冒险去吧 少年～"
         ],
 
         "agent": [
-            "Do not try to bend the sword",
-            "That's impossible",
-            "Instead, only try to realize the truth...",
-            "There is no sword."
+            "想折弯一把剑？",
+            "这是不可能的。",
+            "哈哈 但是你发现事实了吗？",
+            "根本就没有剑"
         ],
 
         "rick": [
-            "We're no strangers to love",
-            "You know the rules and so do I",
-            "A full commitment's what I'm thinking of",
-            "You wouldn't get this from any other guy",
-            "I just wanna tell you how I'm feeling",
-            "Gotta make you understand",
-            "Never gonna give you up",
-            "Never gonna let you down",
-            "Never gonna run around and desert you",
-            "Never gonna make you cry",
-            "Never gonna say goodbye",
-            "Never gonna tell a lie and hurt you"
+            "你是我天边最美的云彩",
+            "让我用心把你留下来",
+            "悠悠的唱着最炫的民族风",
+            "让爱卷走所有的尘埃~",
+            "让爱卷走所有的尘埃~~",
+            "让爱卷走所有的尘埃~~~",
+            "让爱卷走所有的尘埃~~~~",
+            "让爱卷走所有的尘埃~~~~~~"
         ],
 
         "scientist": [{
-			"text": [//default
-				"Greetings.",
-				"I am the inventor of these two potions.",
-				"The red one will replenish your health points...",
-				"The orange one will turn you into a firefox and make you invincible...",
-				"But it only lasts for a short while.",
-				"So make good use of it!",
-				"Now if you'll excuse me, I need to get back to my experiments..."
-			]},
-			{"condition": function(game){return (game.player.invincible);},
-			 "text": [
-				"Did you not listen to what I said?!!",
-				"the famous fire-potion only lasts a few seconds",
-				"You shouldn't be wasting them talking to me…"
-			]},
-			{"condition": function(game){return ((game.player.getSpriteName() == "firefox")
-											&& !(game.player.invincible));},
-			 "text": [
-				"Ha ha ha, *name*",
-				"All that glitters is not gold…",
-				"-sigh-",
-				"Did you really think you could abuse me with your disguise?",
-				"I conceived that f…, that potion.",
-				"Better not use your outfit as a deterrent,",
-				"The goons you'll meet will attack you whatever you look like."
-			]}
-			
-		],
+                "text": [ //default
+                    "你好.",
+                    "我是个发明家，发明了两种药水",
+                    "红药水可以恢复你的体力...",
+                    "黄色药水能让你变成无敌状态...",
+                    "但是只能维持一小会.",
+                    "还好利用他们吧!"
+                ]
+            }, {
+                "condition": function(game) {
+                    return (game.player.invincible);
+                },
+                "text": [
+                    "你忘记我说什么了吗?!!",
+                    "黄色药水效果只能维持一会",
+                    "赶快去做点有意义的事情吧~"
+                ]
+            }, {
+                "condition": function(game) {
+                    return ((game.player.getSpriteName() == "firefox") && !(game.player.invincible));
+                },
+                "text": [
+                    "Ha ha ha, *name*",
+                    "并不是所有的星星都会闪耀…",
+                    "-哎-",
+                    "你觉得你能逃过我法眼吗?",
+                    "即使你换了马甲，我也知道是你",
+                    "野外的那些怪物也会发现你，小心啊 年轻人。"
+                ]
+            }
+
+        ],
 
         "nyan": [
-            "nyan nyan nyan nyan nyan",
-            "nyan nyan nyan nyan nyan nyan nyan",
-            "nyan nyan nyan nyan nyan nyan",
-            "nyan nyan nyan nyan nyan nyan nyan nyan"
+            "啦 啦 啦 啦 啦",
+            "啦 啦 啦 啦 啦 啦 啦 啦 啦 啦",
+            "啦 啦 啦 啦 啦",
+            "啦 啦 啦 啦 啦"
         ],
 
         "beachnpc": [
@@ -121,57 +109,55 @@ define(['character'], function(Character) {
         ],
 
         "priest": [
-            "Oh, hello, young man.",
-            "Wisdom is everything, so I'll share a few guidelines with you.",
-            "You are free to go wherever you like in this world",
-            "but beware of the many foes that await you.",
-            "You can find many weapons and armors by killing enemies.",
-            "The tougher the enemy, the higher the potential rewards.",
-            "You can also unlock achievements by exploring and hunting.",
-            "Click on the small cup icon to see a list of all the achievements.",
-            "Please stay a while and enjoy the many surprises of BrowserQuest",
-            "Farewell, young friend."
+            "年轻人，你好",
+            "智慧能战胜一切, 所以我有些话要告诉你.",
+            "在这个世界里面, 你能去任何地方",
+            "但是要小心那些躲在暗处的敌人.",
+            "同样消灭那些敌人你能得到更好的武器.",
+            "越强的敌人, 掉落的宝物会越高级.",
+            "作为勇者你不断的冒险就会完成各种各样的成就",
+            "点击右下方的奖杯，看看有多少成就需要你完成.",
+            "去世界的深处去探寻和冒险吧",
+            "再见了，年轻人"
         ],
 
         "sorcerer": [
-            "Ah... I had foreseen you would come to see me.",
-            "Well? How do you like my new staff?",
-            "Pretty cool, eh?",
-            "Where did I get it, you ask?",
-            "I understand. It's easy to get envious.",
-            "I actually crafted it myself, using my mad wizard skills.",
-            "But let me tell you one thing...",
-            "There are lots of items in this game.",
-            "Some more powerful than others.",
-            "In order to find them, exploration is key.",
-            "Good luck."
+            "恩... 我已经预见到你会来找的",
+            "我的新道具如何",
+            "很酷吧",
+            "哪里能够搞到？",
+            "看到这么好的东西,谁都会眼红的.",
+            "其实这个是我自己造的，牛吧",
+            "但是我也告诉你...",
+            "在这个世界里面.",
+            "有很多的道具.",
+            "不断的探索是发现他们的唯一途径.",
+            "祝你好运年轻人"
         ],
 
         "octocat": [
-            "Welcome to BrowserQuest!",
-            "Want to see the source code?",
-            'Check out <a target="_blank" href="http://github.com/browserquest/BrowserQuest">the repository on GitHub</a>'
+            "欢迎来到勇者的世界!",
+            "想看看世界的背后吗?",
+            '哈哈哈~ <a target="_blank" href="http://github.com/browserquest/BrowserQuest">GitHub</a>'
         ],
 
         "coder": [
-            "Hi! Do you know that you can also play BrowserQuest on your tablet or mobile?",
-            "That's the beauty of HTML5!",
-            "Give it a try..."
+            "我在写代码 写代码 写代码...",
+            "我是一个苦逼码农..."
         ],
 
         "beachnpc": [
-            "Don't mind me, I'm just here on vacation.",
-            "I have to say...",
-            "These giant crabs are somewhat annoying.",
-            "Could you please get rid of them for me?"
+            "别打扰我，亲. 我正在休假呢",
+            "但是那些螃蟹实在是太烦人了",
+            "你能帮我干掉他们吗？"
         ],
 
         "desertnpc": [
-            "One does not simply walk into these mountains...",
-            "An ancient undead lord is said to dwell here.",
-            "Nobody knows exactly what he looks like...",
-            "...for none has lived to tell the tale.",
-            "It's not too late to turn around and go home, kid."
+            "进入山区的时候一定要小心啊...",
+            "一个远古的圣兽就居住在里面.",
+            "没人知道他长什么样子...",
+            "...因为见过他的人都死了.",
+            "孩子 现在回家还不晚."
         ],
 
         "othernpc": [
@@ -184,59 +170,57 @@ define(['character'], function(Character) {
         init: function(id, kind) {
             this._super(id, kind, 1);
             this.itemKind = Types.getKindAsString(this.kind);
-            if(typeof NpcTalk[this.itemKind][0] === 'string'){
-				this.discourse = -1;
-				this.talkCount = NpcTalk[this.itemKind].length;
-			}
-			else{
-				this.discourse = 0;
-				this.talkCount = NpcTalk[this.itemKind][this.discourse]["text"].length;
-			}
+            if (typeof NpcTalk[this.itemKind][0] === 'string') {
+                this.discourse = -1;
+                this.talkCount = NpcTalk[this.itemKind].length;
+            } else {
+                this.discourse = 0;
+                this.talkCount = NpcTalk[this.itemKind][this.discourse]["text"].length;
+            }
             this.talkIndex = 0;
         },
-        
-        selectTalk: function(game){
-			var change = false;
-			if(this.discourse != -1){
-				var found = false;
-				for(var i = 1; !found && i<NpcTalk[this.itemKind].length; i++){
-					if(NpcTalk[this.itemKind][i]["condition"](game)){
-						if(this.discourse != i){
-							change = true;
-							this.discourse = i;
-							this.talkCount = NpcTalk[this.itemKind][this.discourse]["text"].length;
-						}
-						found = true;
-					}
-				}
-				if(!found){
-					if(this.discourse != 0){
-						change = true;
-						this.discourse = 0;
-						this.talkCount = NpcTalk[this.itemKind][this.discourse]["text"].length;
-					}
-				}
-			}
-			return change;
-		},
+
+        selectTalk: function(game) {
+            var change = false;
+            if (this.discourse != -1) {
+                var found = false;
+                for (var i = 1; !found && i < NpcTalk[this.itemKind].length; i++) {
+                    if (NpcTalk[this.itemKind][i]["condition"](game)) {
+                        if (this.discourse != i) {
+                            change = true;
+                            this.discourse = i;
+                            this.talkCount = NpcTalk[this.itemKind][this.discourse]["text"].length;
+                        }
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    if (this.discourse != 0) {
+                        change = true;
+                        this.discourse = 0;
+                        this.talkCount = NpcTalk[this.itemKind][this.discourse]["text"].length;
+                    }
+                }
+            }
+            return change;
+        },
 
         talk: function(game) {
             var msg = "";
 
-            if(this.selectTalk(game) || (this.talkIndex > this.talkCount) ){
+            if (this.selectTalk(game) || (this.talkIndex > this.talkCount)) {
                 this.talkIndex = 0;
             }
-            if(this.talkIndex < this.talkCount) {
-				if(this.discourse == -1){
-					msg = NpcTalk[this.itemKind][this.talkIndex];
-				}
-				else{
-					msg = NpcTalk[this.itemKind][this.discourse]["text"][this.talkIndex];
-				}
+            if (this.talkIndex < this.talkCount) {
+                if (this.discourse == -1) {
+                    msg = NpcTalk[this.itemKind][this.talkIndex];
+                } else {
+                    msg = NpcTalk[this.itemKind][this.discourse]["text"][this.talkIndex];
+                }
             }
             this.talkIndex += 1;
 
-            return msg.replace('*name*',game.player.name);
+            return msg.replace('*name*', game.player.name);
         }
     });
 

@@ -843,9 +843,9 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
               self.player.getSpriteName(),
               self.player.getWeaponName(),
               self.player.getGuild());
-            self.showNotification("Welcome to BrowserQuest!");
+            self.showNotification("欢迎进入勇士的世界!");
           } else {
-            self.showNotification("Welcome Back. You are level " + self.player.level + ".");
+            self.showNotification("欢迎回来勇士!");
             self.storage.setPlayerName(name);
           }
 
@@ -1064,9 +1064,9 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
           self.client.onPVPChange(function(pvpFlag) {
             self.player.flagPVP(pvpFlag);
             if (pvpFlag) {
-              self.showNotification("PVP is on.");
+              self.showNotification("PVP 开启.");
             } else {
-              self.showNotification("PVP is off.");
+              self.showNotification("PVP 关闭.");
             }
           });
 
@@ -1329,10 +1329,10 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
           });
 
           self.client.onGuildInvite(function(guildId, guildName, invitorName) {
-            self.showNotification(invitorName + " invited you to join “" + guildName + "”.");
+            self.showNotification(invitorName + " 邀请你加入“" + guildName + "”.");
             self.player.addInvite(guildId);
             setTimeout(function() {
-              $("#chatinput").attr("placeholder", "Do you want to join " + guildName + " ? Type /guild accept yes or /guild accept no");
+              $("#chatinput").attr("placeholder", "你想加入 " + guildName + " ? Type /guild accept yes or /guild accept no");
               self.app.showChat();
             }, 2500);
           });
@@ -1363,33 +1363,33 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
                 if (self.player.getGuild().name === guildName) { //do not erase new guild on create
                   self.player.unsetGuild();
                   self.storage.setPlayerGuild();
-                  self.showNotification("You successfully left “" + guildName + "”.");
+                  self.showNotification("你已经离开 “" + guildName + "”.");
                 }
               }
               //missing elses above should not happen (errors)
             } else {
-              self.showNotification(name + " has left “" + guildName + "”."); //#updateguild
+              self.showNotification(name + " 离开了 “" + guildName + "”."); //#updateguild
             }
           });
 
           self.client.onGuildTalk(function(name, id, message) {
             if (id === self.player.id) {
-              self.showNotification("YOU: " + message);
+              self.showNotification("你说: " + message);
             } else {
               self.showNotification(name + ": " + message);
             }
           });
 
           self.client.onMemberConnect(function(name) {
-            self.showNotification(name + " connected to your world."); //#updateguild
+            self.showNotification(name + " 加入游戏."); //#updateguild
           });
 
           self.client.onMemberDisconnect(function(name) {
-            self.showNotification(name + " lost connection with your world.");
+            self.showNotification(name + " 退出游戏.");
           });
 
           self.client.onReceiveGuildMembers(function(memberNames) {
-            self.showNotification(memberNames.join(", ") + ((memberNames.length === 1) ? " is " : " are ") + "currently online."); //#updateguild
+            self.showNotification(memberNames.join(", ") + ((memberNames.length === 1) ? " 已 " : " 已") + "在线."); //#updateguild
           });
 
           self.client.onEntityMove(function(id, x, y) {
@@ -1474,24 +1474,26 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
             var expForLevelUp = Types.expForLevel[self.player.level] - Types.expForLevel[self.player.level - 1];
             var expPercentThisLevel = (100 * expInThisLevel / expForLevelUp);
 
-            self.showNotification("Total xp: " + self.player.experience + ". " + expPercentThisLevel.toFixed(0) + "% of this level done.");
+            self.showNotification("总共经验: " + self.player.experience);
+            // TODO
+            // + ". " + expPercentThisLevel.toFixed(0) + "% of this level done.");
 
             var mobName = Types.getKindAsString(kind);
 
             if (mobName === 'skeleton2') {
-              mobName = 'greater skeleton';
+              mobName = '骷髅怪';
             }
 
             if (mobName === 'eye') {
-              mobName = 'evil eye';
+              mobName = '独眼怪';
             }
 
             if (mobName === 'deathknight') {
-              mobName = 'death knight';
+              mobName = '死亡骑士';
             }
 
             if (mobName === 'boss') {
-              self.showNotification("You killed the skeleton king");
+              self.showNotification("你杀死了大boss 骷髅王");
             }
 
             self.storage.incrementTotalKills();
@@ -2614,9 +2616,9 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
           this.playerhp_callback(this.player.hitPoints, this.player.maxHitPoints);
         }
       },
-      updateLevel:function(level){
+      updateLevel: function(level) {
         $('#level .levelvalue')[0].innerText = level;
-        console.log('current level is ',level);
+        console.log('current level is ', level);
       },
       updateExpBar: function() {
         if (this.player && this.playerexp_callback) {

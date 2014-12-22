@@ -264,6 +264,26 @@ define(['jquery', 'storage'], function($, Storage) {
     },
     //Init the hud that makes it show what creature you are mousing over and attacking
     initTargetHud: function() {
+
+      var tr = {
+        warrior: "勇士",
+        rat: "老鼠",
+        skeleton: "骷髅鬼",
+        goblin: "哥布林",
+        ogre: "蓝胖",
+        spectre: "幽灵",
+        deathknight: "死亡骑士",
+        crab: "小螃蟹",
+        snake: "青蛇",
+        bat: "蝙蝠",
+        wizard: "巫师",
+        eye: "独眼怪",
+        skeleton2: "骷髅怪",
+        boss: "BOSS"
+
+      };
+
+
       var self = this;
       var scale = self.game.renderer.getScaleFactor(),
         healthMaxWidth = $("#inspector .health").width() - (12 * scale),
@@ -273,7 +293,7 @@ define(['jquery', 'storage'], function($, Storage) {
         var sprite = target.sprite,
           x = ((sprite.animationData.idle_down.length - 1) * sprite.width),
           y = ((sprite.animationData.idle_down.row) * sprite.height);
-        $(el + ' .name').text(name);
+        $(el + ' .name').text(tr[name] || name);
         //Show how much Health creature has left. Currently does not work. The reason health doesn't currently go down has to do with the lines below down to initExpBar...
         if (target.healthPoints) {
           $(el + " .health").css('width', Math.round(target.healthPoints / target.maxHp * 100) + '%');
@@ -282,7 +302,7 @@ define(['jquery', 'storage'], function($, Storage) {
         }
         var level = Types.getMobLevel(Types.getKindFromString(name));
         if (level !== undefined) {
-          $(el + ' .level').text("Level " + level);
+          $(el + ' .level').text(level + " 级  ");
         } else {
           $('#inspector .level').text('');
         }
