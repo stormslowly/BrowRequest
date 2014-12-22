@@ -96,6 +96,8 @@
     -ms-animation: logo3 .8s steps(6, end) infinite;
 }
 
+
+
 #shop {
     background: url('../img/2/spritesheet.png');
     image-rendering: -moz-crisp-edges;
@@ -164,4 +166,28 @@
     z-index: 30000;
     opacity: 1;
     pointer-events: auto;
+}
+
+@media all and (width: 800px){
+    #shop{
+        margin-left: -208px;
+        margin-top: -93px;
+        width: 417px;
+        font-size: 16px;
+        height: 172px;
+        background: url('../img/1/spritesheet.png');
+        background-position: 0px -527px;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-optimize-contrast;
+    }
+    #shop ul {
+        margin-top: -45px;
+    }
+    #shop ul li {
+        font-size: 10px;
+        margin-left: 110px;
+        margin-bottom: -10px;
+    }
+
+
 }
