@@ -527,5 +527,4 @@ define(['jquery', 'app', 'entrypoint'], function($, App, EntryPoint) {
     });
   };
   initApp();
-  app.tryStartingGame();
 });

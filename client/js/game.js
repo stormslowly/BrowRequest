@@ -191,7 +191,7 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
         this.achievements = {
           A_TRUE_WARRIOR: {
             id: 1,
-            name: "A True Warrior",
+            name: "真正的勇士",
             desc: "Find a new weapon"
           },
           INTO_THE_WILD: {

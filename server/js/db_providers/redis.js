@@ -3,12 +3,13 @@ var Utils = require('../utils');
 var cls = require("../lib/class"),
     Player = require('../player'),
     Messages = require("../message"),
-    redis = require("redis"),
-    bcrypt = require("bcrypt");
+    redis = require("redis");
 
 module.exports = DatabaseHandler = cls.Class.extend({
     init: function(config){
-        client = redis.createClient(config.redis_port, config.redis_host, {socket_nodelay: true});
+        client = redis.createClient(process.env.OPENSHIFT_REDIS_PORT || process.env.OPENSHIFT_REDIS_DB_PORT || config.redis_port,
+            process.env.OPENSHIFT_REDIS_HOST || process.env.OPENSHIFT_REDIS_DB_HOST || config.redis_host,
+          {socket_nodelay: true});
         client.auth(config.redis_password || "");
     },
     loadPlayer: function(player){
@@ -98,15 +99,13 @@ module.exports = DatabaseHandler = cls.Class.extend({
                             var chatBanEndTime = Utils.NaN2Zero(replies[35]);
 
                             // Check Password
+                            if(pw !== player.pw){
+                                player.connection.sendUTF8("invalidlogin");
+                                player.connection.close("Wrong Password: " + player.name);
+                                return;
+                            }
 
-                            bcrypt.compare(player.pw, pw, function(err, res) {
-                                if(!res) {
-                                    player.connection.sendUTF8("invalidlogin");
-                                    player.connection.close("Wrong Password: " + player.name);
-                                    return;
-                                }
-
-                                var d = new Date();
+                            var d = new Date();
                                 var lastLoginTimeDate = new Date(lastLoginTime);
                                 if(lastLoginTimeDate.getDate() !== d.getDate()
                                 && pubPoint > 0){
@@ -167,13 +166,12 @@ module.exports = DatabaseHandler = cls.Class.extend({
                                 log.info("Chatting Ban End Time: " + (new Date(chatBanEndTime)).toString());
 
                                 player.sendWelcome(armor, weapon,
-                                    avatar, weaponAvatar, exp, admin,
-                                    bannedTime, banUseTime,
-                                    inventory, inventoryNumber,
-                                    achievementFound, achievementProgress,
-                                    x, y,
-                                    chatBanEndTime);
-                            });
+                                avatar, weaponAvatar, exp, admin,
+                                bannedTime, banUseTime,
+                                inventory, inventoryNumber,
+                                achievementFound, achievementProgress,
+                                x, y,
+                                chatBanEndTime);
                     });
                     return;
                 }

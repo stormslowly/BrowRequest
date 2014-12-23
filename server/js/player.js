@@ -8,8 +8,7 @@ var cls = require("./lib/class"),
     Properties = require("./properties"),
     Formulas = require("./formulas"),
     check = require("./format").check,
-    Types = require("../../shared/js/gametypes")
-    bcrypt = require('bcrypt');
+    Types = require("../../shared/js/gametypes");
 
 module.exports = Player = Character.extend({
     init: function(connection, worldServer, databaseHandler) {
@@ -64,27 +63,20 @@ module.exports = Player = Character.extend({
                 var name = Utils.sanitize(message[1]);
                 var pw = Utils.sanitize(message[2]);
 
+                // If name was cleared by the sanitizer, give a default name.
                 // Always ensure that the name is not longer than a maximum length.
                 // (also enforced by the maxlength attribute of the name input element).
-                self.name = name.substr(0, 12).trim()
-
-                // Validate the username
+                self.name = name.substr(0, 8).split(' ')[0];
                 if(!self.checkName(self.name)){
-                    self.connection.sendUTF8("invalidusername");
                     self.connection.close("Invalid name " + self.name);
                     return;
                 }
                 self.pw = pw.substr(0, 15);
 
                 if(action === Types.Messages.CREATE) {
-                    bcrypt.genSalt(10, function(err, salt) {
-                        bcrypt.hash(self.pw, salt, function(err, hash) {
-                            log.info("CREATE: " + self.name);
-                            self.email = Utils.sanitize(message[3]);
-                            self.pw = hash;
-                            databaseHandler.createPlayer(self);
-                        })
-                    });
+                    log.info("CREATE: " + self.name);
+                    self.email = Utils.sanitize(message[3]);
+                    databaseHandler.createPlayer(self);
                 } else {
                     log.info("LOGIN: " + self.name);
                     if(self.server.loggedInPlayer(self.name)) {
@@ -102,19 +94,19 @@ module.exports = Player = Character.extend({
                 // if(typeof message[4] !== 'undefined') {
                 //     var aGuildId = self.server.reloadGuild(message[4],message[5]);
                 //     if( aGuildId !== message[4]) {
-                //         self.server.pushToPlayer(self, new Messages.GuildError(Types.Messages.GUILDERRORTYPE.IDWARNING,message[5]));
-                //     }
-                // }
-                // self.orientation = Utils.randomOrientation();
-                // self.updateHitPoints();
-                // self.updatePosition();
-                //
-                // self.server.addPlayer(self, aGuildId);
-                // self.server.enter_callback(self);
-                //
-                // self.send([Types.Messages.WELCOME, self.id, self.name, self.x, self.y, self.hitPoints]);
-                // self.hasEnteredGame = true;
-                // self.isDead = false;
+//                      self.server.pushToPlayer(self, new Messages.GuildError(Types.Messages.GUILDERRORTYPE.IDWARNING,message[5]));
+//                  }
+//              }
+//              self.orientation = Utils.randomOrientation();
+//              self.updateHitPoints();
+//              self.updatePosition();
+
+//              self.server.addPlayer(self, aGuildId);
+//              self.server.enter_callback(self);
+
+//              self.send([Types.Messages.WELCOME, self.id, self.name, self.x, self.y, self.hitPoints]);
+//              self.hasEnteredGame = true;
+//              self.isDead = false;
             }
             else if(action === Types.Messages.WHO) {
                 log.info("WHO: " + self.name);
@@ -386,17 +378,18 @@ module.exports = Player = Character.extend({
                     }
                 }
                 else if(message[1] === Types.Messages.GUILDACTION.INVITE) {
-                    var userName = message[2];
-                    var invitee;
-                    if(self.group in self.server.groups) {
-                        invitee = _.find(self.server.groups[self.group].entities,
-                                         function(entity, key) { return (entity instanceof Player && entity.name == userName) ? entity : false; });
-                        if(invitee) {
-                            self.getGuild().invite(invitee,self);
-                        }
-                    }
-                }
-                else if(message[1] === Types.Messages.GUILDACTION.JOIN) {
+				          	var userName = message[2];
+					          var invitee;
+				          	if(self.group in self.server.groups) {
+			            			invitee = _.find(self.server.groups[self.group].entities,
+							      		function(entity, key){
+									    	return (entity instanceof Player && entity.name == userName) ? entity : false;});
+            						if(invitee) {
+					            		self.getGuild().invite(invitee,self);
+					            	}
+			          		}
+				        }
+    				    else if(message[1] === Types.Messages.GUILDACTION.JOIN) {
                     self.server.joinGuild(self, message[2], message[3]);
                 }
                 else if(message[1] === Types.Messages.GUILDACTION.LEAVE) {
@@ -639,24 +632,20 @@ module.exports = Player = Character.extend({
 
     checkName: function(name) {
         if(name === null) return false;
-        else if(name === '') return false;
-        else if(name === ' ') return false;
+      else if(name === '') return false;
+      else if(name === ' ') return false;
 
-        for(var i=0; i < name.length; i++) {
-            var c = name.charCodeAt(i);
+      for(var i=0; i < name.length; i++){
+          var c = name.charCodeAt(i);
 
-            if(!((0xAC00 <= c && c <= 0xD7A3) || (0x3131 <= c && c <= 0x318E)       // Korean (Unicode blocks "Hangul Syllables" and "Hangul Compatibility Jamo")
-                || (0x61 <= c && c <= 0x7A) || (0x41 <= c && c <= 0x5A)             // English (lowercase and uppercase)
-                || (0x30 <= c && c <= 0x39)                                         // Numbers
-                || (c == 0x20) || (c == 0x5f)                                       // Space and underscore
-                || (c == 0x28) || (c == 0x29)                                       // Parentheses
-                || (c == 0x5e))) {                                                  // Caret
-                return false;
-            }
-        }
-        return true;
-    },
-
+          if(!((0xAC00 <= c && c <= 0xD7A3) || (0x3131 <= c && c <= 0x318E)
+            || (0x61 <= c && c <= 0x7A) || (0x41 <= c && c <= 0x5A)
+            || (0x30 <= c && c <= 0x39))){
+              return false;
+          }
+      }
+      return true;
+  },
     sendWelcome: function(armor, weapon, avatar, weaponAvatar, exp, admin,
                           bannedTime, banUseTime,
                           inventory, inventoryNumber, achievementFound, achievementProgress,
@@ -700,20 +689,34 @@ module.exports = Player = Character.extend({
             Types.Messages.WELCOME, self.id, self.name, self.x, self.y,
             self.hitPoints, armor, weapon, avatar, weaponAvatar,
             self.experience, self.admin,
-            inventory[0], inventoryNumber[0], inventory[1], inventoryNumber[1],
-            achievementFound[0], achievementProgress[0], achievementFound[1],
-            achievementProgress[1], achievementFound[2], achievementProgress[2],
-            achievementFound[3], achievementProgress[3], achievementFound[4],
-            achievementProgress[4], achievementFound[5], achievementProgress[5],
-            achievementFound[6], achievementProgress[6], achievementFound[7],
-            achievementProgress[7]
-        ]);
+        inventory[0], inventoryNumber[0], inventory[1], inventoryNumber[1],
+        achievementFound[0], achievementProgress[0], achievementFound[1],
+        achievementProgress[1], achievementFound[2], achievementProgress[2],
+        achievementFound[3], achievementProgress[3], achievementFound[4],
+        achievementProgress[4], achievementFound[5], achievementProgress[5],
+        achievementFound[6], achievementProgress[6], achievementFound[7],
+        achievementProgress[7]]);
+      self.hasEnteredGame = true;
+      self.isDead = false;
 
-        self.hasEnteredGame = true;
-        self.isDead = false;
+//    self.server.addPlayer(self, aGuildId);
 
-        // self.server.addPlayer(self, aGuildId);
+    },
+	    checkName: function(name){
+        if(name === null) return false;
+        else if(name === '') return false;
+        else if(name === ' ') return false;
 
+        for(var i=0; i < name.length; i++){
+            var c = name.charCodeAt(i);
+
+           if(!((0xAC00 <= c && c <= 0xD7A3) || (0x3131 <= c && c <= 0x318E)
+             || (0x61 <= c && c <= 0x7A) || (0x41 <= c && c <= 0x5A)
+             || (0x30 <= c && c <= 0x39))){
+               return false;
+           }
+        }
+        return true;
     },
 
 });
