@@ -96,8 +96,6 @@
     -ms-animation: logo3 .8s steps(6, end) infinite;
 }
 
-
-
 #shop {
     background: url('../img/2/spritesheet.png');
     image-rendering: -moz-crisp-edges;
@@ -168,7 +166,7 @@
     pointer-events: auto;
 }
 
-@media all and (width: 800px){
+@media all and (max-width: 800px){
     #shop{
         margin-left: -208px;
         margin-top: -93px;
