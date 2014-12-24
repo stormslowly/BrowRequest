@@ -79,12 +79,12 @@
         </h1>
 
         <form action="none" method="get" accept-charset="utf-8">
-          <input type="text" id="nameinput" class="stroke" name="player-name" placeholder="Character Name"
+          <input type="text" id="nameinput" class="stroke" name="player-name" placeholder="输入角色名(英文)"
                  maxlength="12">
-          <input type="password" id="pwinput" class="stroke" name="player-pw" placeholder="Password" maxlength="15">
-          <input type="password" id="pwinput2" class="stroke" name="player-pw2" placeholder="Confirm Password"
+          <input type="password" id="pwinput" class="stroke" name="player-pw" placeholder="密码" maxlength="15">
+          <input type="password" id="pwinput2" class="stroke" name="player-pw2" placeholder="请重复密码"
                  maxlength="15">
-          <input type="email" id="emailinput" class="stroke" name="player-email" placeholder="Email address"
+          <input type="email" value="test@test.com" id="emailinput" class="stroke" style="display: none;" name="player-email" placeholder="Email address"
                  maxlength="48">
         </form>
         <div class="play">
@@ -117,8 +117,7 @@
       <article id="confirmation">
         <h1>
           <span class="left-ornament"></span>
-          同意一下合约才能创建角色<br>
-          别啰嗦 创建角色吧！<br><br>
+          <span>同意继续创建角色</span>
           <span class="right-ornament"></span>
         </h1>
 
