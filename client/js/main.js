@@ -38,12 +38,18 @@ define(['jquery', 'app', 'entrypoint'], function($, App, EntryPoint) {
         }
       });
       $('#helpbutton').click(function() {
-        if ($('body').hasClass('about')) {
-          app.closeInGameScroll('about');
-          $('#helpbutton').removeClass('active');
-        } else {
-          app.toggleScrollContent('about');
+        var addcoin = $('#addcoin');
+        if (addcoin.hasClass('active')){
+          addcoin.removeClass('active');
+        }else{
+          addcoin.addClass('active');
         }
+//        if ($('body').hasClass('about')) {
+//          app.closeInGameScroll('about');
+//          $('#helpbutton').removeClass('active');
+//        } else {
+//          app.toggleScrollContent('about');
+//        }
       });
       $('#achievementsbutton').click(function() {
         app.toggleAchievements();
@@ -393,7 +399,7 @@ define(['jquery', 'app', 'entrypoint'], function($, App, EntryPoint) {
               $('#achievementsbutton').click();
               break;
             case Types.Keys.H:
-              $('#helpbutton').click();
+              //$('#helpbutton').click();
               break;
             case Types.Keys.M:
               $('#mutebutton').click();

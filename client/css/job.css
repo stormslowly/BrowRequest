@@ -96,13 +96,13 @@
     -ms-animation: logo3 .8s steps(6, end) infinite;
 }
 
-#shop {
+.shop {
     background: url('../img/2/spritesheet.png');
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
 }
 
-#shop {
+.shop {
     height: 344px;
     width: 834px;
     background-position: 0 -1054px;
@@ -111,7 +111,7 @@
     color: #373737;
 }
 
-#shop {
+.shop {
     font-family: 'GraphicPixel';
     position: absolute;
     left: 50%;
@@ -126,15 +126,16 @@
     transition: 0.4s top ease, 0.4s opacity linear;
 }
 
-#shop h1 {
+.shop h1 {
     font-size: 30px;
     text-align: center;
     margin: 40px 0;
 }
 
-#shop ul {
+.shop ul {
     font-size: 25px;
     margin-top: 40px;
+    margin-left:60px;
 }
 
 .gold {
@@ -145,29 +146,29 @@
 }
 
 
-#shop ul li {
+.shop ul li {
     font-size: 40px;
     margin-left: 110px;
     margin-bottom: 10px;
 }
 
-#shop ul li:hover{
+.shop ul li:hover{
     margin-left: 90px;
 }
 
 
-#shop ul li small {
+.shop ul li small {
     font-size: 20px;
 }
 
-#shop.active {
+.shop.active {
     z-index: 30000;
     opacity: 1;
     pointer-events: auto;
 }
 
 @media all and (max-width: 800px){
-    #shop{
+    .shop{
         margin-left: -208px;
         margin-top: -93px;
         width: 417px;
@@ -178,10 +179,10 @@
         image-rendering: -moz-crisp-edges;
         image-rendering: -webkit-optimize-contrast;
     }
-    #shop ul {
+    .shop ul {
         margin-top: -45px;
     }
-    #shop ul li {
+    .shop ul li {
         font-size: 10px;
         margin-left: 110px;
         margin-bottom: -10px;
