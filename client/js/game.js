@@ -192,119 +192,119 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
           A_TRUE_WARRIOR: {
             id: 1,
             name: "真正的勇士",
-            desc: "Find a new weapon"
+            desc: "找到新的工具"
           },
           INTO_THE_WILD: {
             id: 2,
-            name: "Into the Wild",
-            desc: "Venture outside the village"
+            name: "到外面的世界",
+            desc: "到村庄外面冒险"
           },
           ANGRY_RATS: {
             id: 3,
-            name: "Angry Rats",
-            desc: "Kill 10 rats",
+            name: "灭鼠能手",
+            desc: "杀死10只老鼠",
             isCompleted: function() {
               return self.storage.getRatCount() >= 10;
             }
           },
           SMALL_TALK: {
             id: 4,
-            name: "Small Talk",
-            desc: "Talk to a non-player character"
+            name: "小话唠",
+            desc: "和NPC聊个天"
           },
           FAT_LOOT: {
             id: 5,
-            name: "Fat Loot",
-            desc: "Get a new armor set"
+            name: "保护自己",
+            desc: "获得新的护具"
           },
           UNDERGROUND: {
             id: 6,
-            name: "Underground",
-            desc: "Explore at least one cave"
+            name: "地下工作者",
+            desc: "进入一个洞穴"
           },
           AT_WORLDS_END: {
             id: 7,
-            name: "At World's End",
-            desc: "Reach the south shore"
+            name: "世界的镜头",
+            desc: "到达世界"
           },
           COWARD: {
             id: 8,
-            name: "Coward",
-            desc: "Successfully escape an enemy"
+            name: "能屈能伸",
+            desc: "成功逃脱一次敌人的追击"
           },
           TOMB_RAIDER: {
             id: 9,
-            name: "Tomb Raider",
-            desc: "Find the graveyard"
+            name: "盗  墓",
+            desc: "进入墓地"
           },
           SKULL_COLLECTOR: {
             id: 10,
-            name: "Skull Collector",
-            desc: "Kill 10 skeletons",
+            name: "头骨",
+            desc: "杀死10个骷髅",
             isCompleted: function() {
               return self.storage.getSkeletonCount() >= 10;
             }
           },
           NINJA_LOOT: {
             id: 11,
-            name: "Ninja Loot",
-            desc: "Get hold of an item you didn't fight for"
+            name: "不劳而获",
+            desc: "拾取一个非敌方跌落的武器"
           },
           NO_MANS_LAND: {
             id: 12,
-            name: "No Man's Land",
-            desc: "Travel through the desert"
+            name: "无人区",
+            desc: "穿过沙漠无人区"
           },
           HUNTER: {
             id: 13,
-            name: "Hunter",
-            desc: "Kill 50 enemies",
+            name: "猎手",
+            desc: "杀敌数超过50",
             isCompleted: function() {
               return self.storage.getTotalKills() >= 50;
             }
           },
           STILL_ALIVE: {
             id: 14,
-            name: "Still Alive",
-            desc: "Revive your character five times",
+            name: "屡败屡战",
+            desc: "复活角色5次以上",
             isCompleted: function() {
               return self.storage.getTotalRevives() >= 5;
             }
           },
           MEATSHIELD: {
             id: 15,
-            name: "Meatshield",
-            desc: "Take 5,000 points of damage",
+            name: "肉盾",
+            desc: "累计承受500点伤害",
             isCompleted: function() {
               return self.storage.getTotalDamageTaken() >= 5000;
             }
           },
           HOT_SPOT: {
             id: 16,
-            name: "Hot Spot",
-            desc: "Enter the volcanic mountains"
+            name: "火山探索",
+            desc: "进入火山地区"
           },
           HERO: {
             id: 17,
-            name: "Hero",
-            desc: "Defeat the final boss"
+            name: "英雄",
+            desc: "找到并杀死最终Boss"
           },
           FOXY: {
             id: 18,
-            name: "Foxy",
-            desc: "Find the Firefox costume",
+            name: "狐狸伪装",
+            desc: "找到狐狸伪装",
             hidden: true
           },
           FOR_SCIENCE: {
             id: 19,
-            name: "For Science",
-            desc: "Enter into a portal",
+            name: "探索勇士",
+            desc: "寻找并使用传送点",
             hidden: true
           },
           RICKROLLD: {
             id: 20,
-            name: "Rickroll'd",
-            desc: "Take some singing lessons",
+            name: "摇滚歌手",
+            desc: "参加歌曲演唱课程",
             hidden: true
           }
         };
