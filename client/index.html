@@ -239,34 +239,6 @@
         <div id="next"></div>
       </nav>
     </article>
-    <article id="shop" class="shop clickable">
-      <div class="close"></div>
-      <h1>
-        <span class="left-ornament"></span>
-        商城
-        <span class="right-ornament"></span>
-      </h1>
-
-      <ul>
-        <li class="link shopitem"><span class="icon"></span>
-          <span class="name">vip升级卡</span>
-          <small>vip等级+1</small>
-          8000<span class="gold"/>
-        </li>
-        <li class="shopitem link" ><span class="icon"></span>普通升级卡
-          <small>人物等级+1</small>
-           500<span class="gold"/>
-        </li>
-        <li class="shopitem link"><span class="icon"></span>中级升级卡
-          <small>人物等级+2</small>
-          1500<span class="gold"/>
-        </li>
-        <li class="shopitem link"><span class="icon"></span>高级升级卡
-          <small>人物等级+3</small>
-          2000<span class="gold"/>
-        </li>
-      </ul>
-    </article>
     <article id="addcoin" class="shop clickable">
       <div class="close"></div>
       <h1>
@@ -274,45 +246,78 @@
         商城
         <span class="right-ornament"></span>
       </h1>
-
       <ul>
-        <li class="shopitem link"><span class="icon"></span>
+        <li class="link shopitem"><span class="icon"></span>
           <span class="name">vip升级卡</span>
           <small>vip等级+1</small>
-          8000<span class="gold"/>
+          8000<span class="gold"/></span>
+          <span class="buy"> 购买 </span>
         </li>
         <li class="shopitem link" ><span class="icon"></span>普通升级卡
           <small>人物等级+1</small>
-          500<span class="gold"/>
+           500<span class="gold"></span>
+          <span class="buy"> 购买 </span>
         </li>
         <li class="shopitem link"><span class="icon"></span>中级升级卡
           <small>人物等级+2</small>
-          1500<span class="gold"/>
+          1500<span class="gold"/></span>
+          <span class="buy"> 购买 </span>
         </li>
         <li class="shopitem link"><span class="icon"></span>高级升级卡
           <small>人物等级+3</small>
-          2000<span class="gold"/>
+          2000<span class="gold"/></span>
+          <span class="buy"> 购买 </span>
+        </li>
+      </ul>
+    </article>
+    <article id="shop" class="shop clickable">
+      <div class="close"></div>
+      <h1>
+        <span class="left-ornament"></span>
+        充值
+        <span class="right-ornament"></span>
+      </h1>
+
+      <ul>
+        <li class="shopitem link">
+          <span class="icon"></span>
+          <span class="name">1000</span>
+          <small>元</small>
+          <span class="gold"/> </span>
+          <span class="buy"> 购买 </span>
+        </li>
+        <li class="shopitem link" ><span class="icon"></span>
+          <span class="name">800</span>
+          <small>元</small>
+          <span class="gold"/> </span>
+          <span class="buy"> 购买 </span>
+        </li>
+        <li class="shopitem link"><span class="icon"></span>
+          <span class="name">500</span>
+          <small>元</small>
+          <span class="gold"/> </span>
+          <span class="buy"> 购买 </span>
         </li>
       </ul>
     </article>
     <div class="infoboard" id="playershow">
-      <div id="level" class="level">
-        <div class="head">等级:</div>
-        <div class="levelvalue"></div>
-      </div>
-      <div id="viplevel" class="level">
-        <div class="head">VIP:</div>
-        <div class="levelvalue">0</div>
-        <div id="buybutton" class="link">
-          <!--<img src="/img/common/cz.gif"/>-->
-        </div>
+    <div id="level" class="level">
+      <div class="head">等级:</div>
+      <div class="levelvalue"></div>
+    </div>
+    <div id="viplevel" class="level">
+      <div class="head">VIP:</div>
+      <div class="levelvalue">0</div>
+      <div id="buybutton" class="link">
+        <!--<img src="/img/common/cz.gif"/>-->
       </div>
     </div>
-    <div id="canvas">
-      <canvas id="background"></canvas>
-      <canvas id="entities"></canvas>
-      <canvas id="foreground" class="clickable"></canvas>
-    </div>
+  </div>
+  <div id="canvas">
+    <canvas id="background"></canvas>
+    <canvas id="entities"></canvas>
+    <canvas id="foreground" class="clickable"></canvas>
+  </div>
     <div id="bubbles"></div>
     <div id="expbar"></div>
     <div id="textWindow"></div>

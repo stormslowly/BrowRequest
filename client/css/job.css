@@ -111,6 +111,15 @@
     color: #373737;
 }
 
+.shop .buy{
+    margin-left: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
 .shop {
     font-family: 'GraphicPixel';
     position: absolute;
@@ -154,6 +163,10 @@
 
 .shop ul li:hover{
     margin-left: 90px;
+}
+
+li:hover .buy{
+    border-color: red;
 }
 
 

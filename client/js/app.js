@@ -427,6 +427,10 @@ define(['jquery', 'storage'], function($, Storage) {
         $('#shop').removeClass('active');
       }
 
+      if($('#addcoin').hasClass('active')){
+        $('#addcoin').removeClass('active');
+      };
+
       if ($('#instructions').hasClass('active')) {
         this.toggleInstructions();
         $('#helpbutton').removeClass('active');
