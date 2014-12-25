@@ -122,23 +122,23 @@ define(['jquery', 'storage'], function($, Storage) {
             switch (result.reason) {
               case 'invalidlogin':
                 // Login information was not correct (either username or password)
-                self.addValidationError(null, 'The username or password you entered is incorrect.');
+                self.addValidationError(null, '用户名或密码错误');
                 self.getUsernameField().focus();
                 break;
               case 'userexists':
                 // Attempted to create a new user, but the username was taken
-                self.addValidationError(self.getUsernameField(), 'The username you entered is not available.');
+                self.addValidationError(self.getUsernameField(), '当前用户名不可用');
                 break;
               case 'invalidusername':
                 // The username contains characters that are not allowed (rejected by the sanitizer)
-                self.addValidationError(self.getUsernameField(), 'The username you entered contains invalid characters.');
+                self.addValidationError(self.getUsernameField(), '当用用户名不可用');
                 break;
               case 'loggedin':
                 // Attempted to log in with the same user multiple times simultaneously
-                self.addValidationError(self.getUsernameField(), 'A player with the specified username is already logged in.');
+                self.addValidationError(self.getUsernameField(), '当前用户已经在其他地方登陆了');
                 break;
               default:
-                self.addValidationError(null, 'Failed to launch the game: ' + (result.reason ? result.reason : '(reason unknown)'));
+                self.addValidationError(null, '游戏启动失败: ' + (result.reason ? result.reason : '(reason unknown)'));
                 break;
             }
           }
@@ -193,25 +193,25 @@ define(['jquery', 'storage'], function($, Storage) {
     validateFormFields: function(username, userpw, userpw2, email) {
       this.clearValidationErrors();
       if (!username) {
-        this.addValidationError(this.getUsernameField(), 'Please enter a username.');
+        this.addValidationError(this.getUsernameField(), '请输入一个用户名');
         return false;
       }
       if (!userpw) {
-        this.addValidationError(this.getPasswordField(), 'Please enter a password.');
+        this.addValidationError(this.getPasswordField(), '用输入密码');
         return false;
       }
       if (this.createNewCharacterFormActive()) { // In Create New Character form (rather than login form)
         if (!userpw2) {
-          this.addValidationError(this.$pwinput2, 'Please confirm your password by typing it again.');
+          this.addValidationError(this.$pwinput2, '请再输入一次密码');
           return false;
         }
         if (userpw !== userpw2) {
-          this.addValidationError(this.$pwinput2, 'The passwords you entered do not match. Please make sure you typed the password correctly.');
+          this.addValidationError(this.$pwinput2, '两次密码输入不一致请重新输入');
           return false;
         }
         // Email field is not required, but if it's filled out, then it should look like a valid email.
         if (email && !this.validateEmail(email)) {
-          this.addValidationError(this.$email, 'The email you entered appears to be invalid. Please enter a valid email (or leave the email blank).');
+          this.addValidationError(this.$email, '邮件非法');
           return false;
         }
       }

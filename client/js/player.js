@@ -86,16 +86,16 @@ define(['character', 'exceptions'], function(Character, Exceptions) {
                 if(item.type === "armor") {
                     rank = Types.getArmorRank(item.kind);
                     currentRank = Types.getArmorRank(Types.getKindFromString(currentArmorName));
-                    msg = "You are wearing a better armor";
+                    msg = "无法拾取一个较差的防具!";
                 } else if(item.type === "weapon") {
                     rank = Types.getWeaponRank(item.kind);
                     currentRank = Types.getWeaponRank(Types.getKindFromString(this.weaponName));
-                    msg = "You are wielding a better weapon";
+                    msg = "无法拾取一个较差的武器!";
                 }
 
                 if(rank && currentRank) {
                     if(rank === currentRank) {
-                        throw new Exceptions.LootException("You already have this "+item.type);
+                        throw new Exceptions.LootException("你已经拥有该装备!");
                     } else if(rank <= currentRank) {
                         throw new Exceptions.LootException(msg);
                     }

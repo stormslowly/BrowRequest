@@ -138,7 +138,7 @@ define(['character'], function(Character) {
         "octocat": [
             "欢迎来到勇者的世界!",
             "想看看世界的背后吗?",
-            '哈哈哈~ <a target="_blank" href="http://github.com/browserquest/BrowserQuest">GitHub</a>'
+            "哈哈哈~ 这些只有码农能知道~"
         ],
 
         "coder": [
