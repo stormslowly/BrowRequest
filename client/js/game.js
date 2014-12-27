@@ -187,7 +187,6 @@ define(['infomanager', 'bubble', 'renderer', 'map', 'animation', 'sprite',
 
       initAchievements: function() {
         var self = this;
-        //todo 任务翻译
         this.achievements = {
           A_TRUE_WARRIOR: {
             id: 1,
